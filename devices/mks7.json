@@ -1,0 +1,54 @@
+{
+    "manufacturer": "Roland",
+    "model": "MKS7",
+    "shortname": "mks7",
+    "parts": [
+        {
+            "name": "Bass",
+            "sections": [
+            ]
+        },
+        {
+            "name": "Melody",
+            "sections": [
+                {
+                    "name": "DCO",
+                    "parameters": [
+                        {
+                            "name": "Range",
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "2'"
+                                },
+                                {
+                                    "name": "4'"
+                                },
+                                {
+                                    "name": "8'"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Filter",
+                    "parameters": [
+                        {
+                            "name": "Cutoff",
+                            "class": "range",
+                            "min": 0,
+                            "max": 127
+                        },
+                        {
+                            "name": "Resonance",
+                            "class": "range",
+                            "min": 0,
+                            "max": 127
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
