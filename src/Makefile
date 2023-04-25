@@ -89,7 +89,8 @@ POST_UNINSTALL = :
 bin_PROGRAMS = synthboss$(EXEEXT)
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/m4/AX_HAVE_QT.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
@@ -101,7 +102,8 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_synthboss_OBJECTS = main.$(OBJEXT)
 synthboss_OBJECTS = $(am_synthboss_OBJECTS)
-synthboss_LDADD = $(LDADD)
+am__DEPENDENCIES_1 =
+synthboss_DEPENDENCIES = $(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -169,6 +171,7 @@ AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
+CPP = gcc -E
 CPPFLAGS = 
 CSCOPE = cscope
 CTAGS = ctags
@@ -203,16 +206,31 @@ PACKAGE_TARNAME = synthboss
 PACKAGE_URL = 
 PACKAGE_VERSION = 0.1
 PATH_SEPARATOR = :
+QMAKE = qmake
+QT_CXXFLAGS = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC -DQT_NO_DEBUG -DQT_DESIGNER_LIB -DQT_UIPLUGIN_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_PRINTSUPPORT_LIB -DQT_UITOOLS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CONCURRENT_LIB -DQT_DBUS_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_TESTLIB_LIB -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR="/tmp/tmp.aDsxoXM7Xr" -I. -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtHelp -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtUiTools -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtTest -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ 
+QT_DIR = /usr/lib/x86_64-linux-gnu
+QT_LIBS = /usr/lib/x86_64-linux-gnu/libQt5Designer.so /usr/lib/x86_64-linux-gnu/libQt5Help.so /usr/lib/x86_64-linux-gnu/libQt5OpenGL.so /usr/lib/x86_64-linux-gnu/libQt5PrintSupport.so /usr/lib/x86_64-linux-gnu/libQt5UiTools.a /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Concurrent.so /usr/lib/x86_64-linux-gnu/libQt5DBus.so /usr/lib/x86_64-linux-gnu/libQt5Xml.so /usr/lib/x86_64-linux-gnu/libQt5Sql.so /usr/lib/x86_64-linux-gnu/libQt5Network.so /usr/lib/x86_64-linux-gnu/libQt5Test.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL -lpthread  
+QT_LRELEASE = /usr/bin/lrelease
+QT_LUPDATE = /usr/bin/lupdate
+QT_MOC = /usr/bin/moc
+QT_RCC = /usr/bin/rcc
+QT_UIC = /usr/bin/uic
 SET_MAKE = 
 SHELL = /bin/bash
 STRIP = 
 VERSION = 0.1
+XMKMF = 
+X_CFLAGS = 
+X_EXTRA_LIBS = 
+X_LIBS = 
+X_PRE_LIBS = 
 abs_builddir = /home/markus/With-Without/synthboss/src
 abs_srcdir = /home/markus/With-Without/synthboss/src
 abs_top_builddir = /home/markus/With-Without/synthboss
 abs_top_srcdir = /home/markus/With-Without/synthboss
 ac_ct_CC = gcc
 ac_ct_CXX = g++
+ac_ct_QMAKE = qmake
 am__include = include
 am__leading_dot = .
 am__quote = 
@@ -251,13 +269,9 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-AM_CXXFLAGS = -g -std=c++11 -Wall -fPIC
-QT_CXXFLAGS = @QT_CXXFLAGS@
-QT_LIBS = @QT_LIBS@
-MOC = @QT_MOC@
-UIC = @QT_UIC@
-RCC = @QT_RCC@
+AM_CXXFLAGS = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC -DQT_NO_DEBUG -DQT_DESIGNER_LIB -DQT_UIPLUGIN_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_PRINTSUPPORT_LIB -DQT_UITOOLS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CONCURRENT_LIB -DQT_DBUS_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_TESTLIB_LIB -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR="/tmp/tmp.aDsxoXM7Xr" -I. -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtHelp -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtUiTools -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtTest -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ 
 synthboss_SOURCES = main.cpp
+synthboss_LDADD = $(QT_LIBS)
 all: all-am
 
 .SUFFIXES:
