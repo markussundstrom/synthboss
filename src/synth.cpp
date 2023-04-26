@@ -1,12 +1,13 @@
+#include "synth.hpp"
 #include "parameter.hpp"
 
-class Synth {
-    private Parameter* parameters;
-
-    public Synth() {
-        this->parameters = calloc(2, size_of(Parameter*));
-        parameters[0] = new RangeParameter();
-        parameters[1] = new ToggleParameter();
-    }
+Synth::Synth() {
+//    this->parameters = (Parameter*)calloc(2, sizeof (Parameter*));
+    
+    parameters.push_back(RangeParameter("range", 0, 0, 127));
+    parameters.push_back(ToggleParameter("toggle", 0));
 }
 
+std::string Synth::printSynth() {
+    return parameters[0].name() + parameters[1].name();
+}
