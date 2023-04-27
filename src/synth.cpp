@@ -11,3 +11,4 @@ Synth::Synth() {
 std::string Synth::printSynth() {
     return parameters[0].name() + parameters[1].name();
 }
+

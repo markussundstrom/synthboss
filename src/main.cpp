@@ -13,7 +13,5 @@ int main(int argc, char **argv)
     QPushButton button ("hello world");
     button.show();
     return app.exec();
-//    std::cout << "Hello\n";
-//    return 0;
 }
 
