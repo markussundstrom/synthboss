@@ -11,7 +11,8 @@ class GuiParameter : public QWidget {
 
 class SbGui : public QMainWindow {
     public:
-        SbGui(Synth synth);
+        SbGui();
+        void addGuiParameter(std::unique_ptr<Parameter>& p);
 
     private:
         QWidget* m_window;

@@ -2,18 +2,16 @@
 #include "sbgui.hpp"
 #include "parameter.hpp"
 
-SbGui::SbGui(Synth synth) {
+SbGui::SbGui() {
     QGridLayout* layout = new QGridLayout;
-    QWidget* sbWindow = new QWidget();
-    setCentralWidget(sbWindow);
+    QWidget* m_window = new QWidget();
+    setCentralWidget(m_window);
     centralWidget()->setLayout(layout);
-    for (int i = 0; i < synth.parameters.size; i++) {
-        m_guiParameters.push_back(new GuiParameter(&synth.parameters[i]));
-        layout.addWidget(m_guiParameters[i]);
-    }
-
 }
 
+SbGui::addGuiParameter(std::unique_ptr<Parameter>& p) {
+    m_guiParameters.push_back(new GuiParameter(p));
+    m_window.layout().addWidget(m_guiParameters[i]);
 
 GuiParameter::Guiparameter(std::unique_ptr<Parameter>& p) {
     QLabel* label = new QLabel;
