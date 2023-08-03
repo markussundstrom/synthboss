@@ -1,38 +1,48 @@
 #include <QGridLayout>
+#include <QLabel>
+#include <QSlider>
+#include <QCheckBox>
+#include <QComboBox>
 #include "sbgui.hpp"
 #include "parameter.hpp"
 
-SbGui::SbGui() {
-    QGridLayout* layout = new QGridLayout;
-    QWidget* m_window = new QWidget();
-    setCentralWidget(m_window);
-    centralWidget()->setLayout(layout);
-}
-
-SbGui::addGuiParameter(std::unique_ptr<Parameter>& p) {
-    m_guiParameters.push_back(new GuiParameter(p));
-    m_window.layout().addWidget(m_guiParameters[i]);
-
-GuiParameter::Guiparameter(std::unique_ptr<Parameter>& p) {
-    QLabel* label = new QLabel;
-    label.setText(p.name());
-
-    if (auto rangeP = dynamic_cast<RangeParameter*>(p.get())) {
-        QSlider* control = new QSlider();
-        control.setMinimum(rangeP->min());
-        control.setMaximum(rangeP->max());
-    } else if (auto toggleP = dynamic_cast<ToggleParameter*>(p.get())) {
-        QCheckbox* control = new QCheckbox("");
-    } else if (auto selectP = dynamic_cast<SelectParameter*>(p.get())) {
-        //
-    } else {
-        //
+SbGui::SbGui(Synth synth) : m_synth(synth) {
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    const std::vector<std::shared_ptr<Parameter>>& parameters = synth.getParameters();
+    for (const auto& parameter : parameters) {
+        QWidget* parameterWidget = createParameterWidget(parameter);
+        layout->addWidget(parameterWidget);
     }
-
-    QHboxLayout* layout = new QHBoxLayout;
-    this->setLayout(layout);
-    layout.addWidget(label);
-    layout.addWidget(control);
+    setLayout(layout);
 }
 
+SbGui::~SbGui() {
+}
+
+
+QWidget* SbGui::createParameterWidget(const std::shared_ptr<Parameter>& parameter) {
+    QHBoxLayout* layout = new QHBoxLayout;
+    QLabel* label = new QLabel(QString::fromStdString(parameter->name()));
+    QWidget* widget = nullptr;
+
+    if (auto rangeP = std::dynamic_pointer_cast<RangeParameter>(parameter)) {
+        QSlider* slider = new QSlider(Qt::Orientation::Horizontal);
+        slider->setMinimum(rangeP->min());
+        slider->setMaximum(rangeP->max());
+        widget = slider;
+    } else if (auto toggleP = std::dynamic_pointer_cast<ToggleParameter>(parameter)) {
+        QCheckBox* checkbox = new QCheckBox("");
+        widget = checkbox;
+    } else if (auto selectP = std::dynamic_pointer_cast<SelectParameter>(parameter)) {
+        QComboBox* combobox = new QComboBox();
+        widget = combobox;
+    } else {
+        return nullptr;
+    }
+    layout->addWidget(label);
+    layout->addWidget(widget);
+    QWidget* parameterWidget = new QWidget();
+    parameterWidget->setLayout(layout);
+    return parameterWidget;
+}
 

@@ -9,7 +9,9 @@ class Parameter {
         uint8_t m_value;
 
     public:
+        Parameter();
         Parameter(const std::string& name, uint8_t value);
+        virtual ~Parameter() = default;
         const std::string& name() const;
         uint8_t value() const;
 };

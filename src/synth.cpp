@@ -1,14 +1,12 @@
 #include "synth.hpp"
 #include "parameter.hpp"
+#include "sbgui.hpp"
 
 Synth::Synth() {
-//    this->parameters = (Parameter*)calloc(2, sizeof (Parameter*));
-    
-    parameters.push_back(RangeParameter("range", 0, 0, 127));
-    parameters.push_back(ToggleParameter("toggle", 0));
+    m_parameters.push_back(std::make_shared<RangeParameter>("range", 0, 0, 127));
+    m_parameters.push_back(std::make_shared<ToggleParameter>("toggle", 0));
 }
 
-std::string Synth::printSynth() {
-    return parameters[0].name() + parameters[1].name();
+const std::vector<std::shared_ptr<Parameter>>& Synth::getParameters() const {
+    return this->m_parameters;
 }
-

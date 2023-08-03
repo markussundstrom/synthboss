@@ -3,15 +3,14 @@
 #include <config.h>
 #include <iostream>
 #include "synth.hpp"
+#include "sbgui.hpp"
 
 int main(int argc, char **argv)
 {
-    Synth* synth = new Synth();
-    std::cout << synth->printSynth();
     QApplication app (argc, argv);
-
-    QPushButton button ("hello world");
-    button.show();
+    Synth synth;
+    SbGui sbGui(synth);
+    sbGui.show();
     return app.exec();
 }
 

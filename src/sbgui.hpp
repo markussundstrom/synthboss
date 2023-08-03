@@ -4,18 +4,17 @@
 #include "synth.hpp"
 #include "parameter.hpp"
 
-class GuiParameter : public QWidget {
-    public:
-        GuiParameter(std::unique_ptr<Parameter>& p);
-};
+class Parameter;
 
-class SbGui : public QMainWindow {
+class SbGui : public QWidget {
+    Q_OBJECT
+
     public:
-        SbGui();
-        void addGuiParameter(std::unique_ptr<Parameter>& p);
+        SbGui(Synth synth);
+        virtual ~SbGui() override;
 
     private:
-        QWidget* m_window;
-        QVector<GuiParameter> m_guiparams;
+        QWidget* createParameterWidget(const std::shared_ptr<Parameter>& parameter);
+        Synth m_synth;
 };
 

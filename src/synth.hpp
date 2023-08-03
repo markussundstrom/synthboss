@@ -1,13 +1,16 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <memory>
 #include "parameter.hpp"
 
-class Synth {
-    private:
-        std::vector<Parameter> parameters;
+//class SbGui;
 
+class Synth {
     public:
         Synth();
-        std::string printSynth(); 
+        const std::vector<std::shared_ptr<Parameter>>& getParameters() const;
+
+    private:
+        std::vector<std::shared_ptr<Parameter>> m_parameters;
 };

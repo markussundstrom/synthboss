@@ -1,5 +1,8 @@
 #include "parameter.hpp"
 
+Parameter::Parameter() 
+    : m_name(""), m_value(0) {}
+
 Parameter::Parameter(const std::string& name, uint8_t value)
     : m_name{name}, m_value{value} {}
 

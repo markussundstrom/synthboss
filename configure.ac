@@ -15,6 +15,8 @@ AC_PROG_CXX
 # Checks for libraries.
 AX_HAVE_QT([5])
 
+AC_PATH_PROG([MOC], [moc])
+AC_SUBST([MOC])
 # Checks for header files.
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -24,5 +26,6 @@ AC_TYPE_UINT8_T
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
+AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects -Wno-portability])
+AM_SILENT_RULES([yes])
 AC_OUTPUT
