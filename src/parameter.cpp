@@ -14,9 +14,9 @@ uint8_t Parameter::value() const {
     return m_value;
 }
 
-RangeParameter::RangeParameter(const std::string& name, uint8_t value, 
-        int min, int max)
-    : Parameter{name, value}, m_min{min}, m_max{max} {}
+RangeParameter::RangeParameter(const json param) 
+    : Parameter{param["name"], param["value"]}, 
+      m_min{param["min"]}, m_max{param["max"]} {}
 
 int RangeParameter::min() const {
     return m_min;
@@ -26,10 +26,17 @@ int RangeParameter::max() const {
     return m_max;
 }
 
-ToggleParameter::ToggleParameter(const std::string& name, uint8_t value)
-    : Parameter{name, value} {}
+ToggleParameter::ToggleParameter(const json param)
+    : Parameter{param["name"], param["value"]} {}
 
-SelectParameter::SelectParameter(const std::string& name, uint8_t value, 
-        std::map<std::string, uint8_t> choices)
-    : Parameter{name, value}, m_choices{choices} {}
+SelectParameter::SelectParameter(const json param)
+    : Parameter{param["name"], param["value"]}, m_choices{} {
+        for (const auto& choice : param["choices"]) {
+            m_choices[choice["name"]] = choice["value"];
+        }
+}
+
+std::map<std::string, uint8_t> SelectParameter::choices() const {
+    return m_choices;
+}
 

@@ -1,0 +1,56 @@
+{
+    "manufacturer": "Roland",
+    "model": "MKS-7",
+    "shortname": "mks7",
+    "parts": [
+        {
+            "name": "Bass",
+            "sections": [
+                {
+                    "name": "DCO",
+                    "parameters": [
+                        {
+                            "name": "Range",
+                            "class": "select",
+                            "value": 0,
+                            "choices": [
+                                {
+                                    "name": "8'",
+                                    "value": 0
+                                },
+                                {
+                                    "name": "16'",
+                                    "value": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "VCF",
+                    "parameters": [
+                        {
+                            "name": "HPF",
+                            "class": "toggle",
+                            "value": 0
+                        },
+                        {
+                            "name": "Cutoff",
+                            "class": "range",
+                            "value": 0,
+                            "max": 127,
+                            "min": 0
+                        },
+                        {
+                            "name": "Resonance",
+                            "class": "range",
+                            "value": 0,
+                            "max": 127,
+                            "min": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,5 +1,4 @@
 #include <QApplication>
-#include <QPushButton>
 #include <config.h>
 #include <iostream>
 #include "synth.hpp"
@@ -8,7 +7,9 @@
 int main(int argc, char **argv)
 {
     QApplication app (argc, argv);
-    Synth synth;
+    //FIXME decide on configuration to load
+    std::string synthConfig = "mks7.json";
+    Synth synth(synthConfig);
     SbGui sbGui(synth);
     sbGui.show();
     return app.exec();

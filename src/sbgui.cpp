@@ -35,6 +35,11 @@ QWidget* SbGui::createParameterWidget(const std::shared_ptr<Parameter>& paramete
         widget = checkbox;
     } else if (auto selectP = std::dynamic_pointer_cast<SelectParameter>(parameter)) {
         QComboBox* combobox = new QComboBox();
+        for (const auto& c : selectP->choices()) {
+            const std::string& choiceName = c.first;
+            uint8_t choiceValue = c.second;
+            combobox->addItem(QString::fromStdString(choiceName), QVariant(choiceValue));
+        }
         widget = combobox;
     } else {
         return nullptr;

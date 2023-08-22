@@ -18,7 +18,7 @@ AX_HAVE_QT([5])
 AC_PATH_PROG([MOC], [moc])
 AC_SUBST([MOC])
 # Checks for header files.
-
+PKG_CHECK_MODULES([JSON], [nlohmann_json])
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_UINT8_T
 

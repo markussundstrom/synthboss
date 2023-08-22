@@ -1,7 +1,12 @@
 #pragma once
+#include <iostream>
 #include <string>
-#include <cstdint>
 #include <map>
+#include <cstdint>
+#include <nlohmann/json.hpp>
+#include <map>
+
+using json = nlohmann::json;
 
 class Parameter {
     private:
@@ -22,15 +27,14 @@ class RangeParameter : public Parameter {
         int m_max;
 
     public:
-        RangeParameter(const std::string& name, uint8_t value, 
-                int min, int max);
+        RangeParameter(const json param);
         int min() const;
         int max() const;
 };
 
 class ToggleParameter : public Parameter {
     public:
-        ToggleParameter(const std::string& name, uint8_t value);
+        ToggleParameter(const json param);
 };
 
 class SelectParameter : public Parameter {
@@ -38,7 +42,7 @@ class SelectParameter : public Parameter {
         std::map<std::string, uint8_t> m_choices;
 
     public:
-        SelectParameter(const std::string& name, uint8_t value, 
-                std::map<std::string, uint8_t> choices);
+        SelectParameter(const json param);
+        std::map<std::string, uint8_t> choices() const;
 };
 
