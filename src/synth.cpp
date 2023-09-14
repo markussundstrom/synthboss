@@ -1,11 +1,8 @@
 #include "synth.hpp"
-#include "sbgui.hpp"
 
 using json = nlohmann::json;
 
-Synth::Synth(std::string synthDef) {
-    /*m_parameters.push_back(std::make_shared<RangeParameter>("range", 0, 0, 127));
-    m_parameters.push_back(std::make_shared<ToggleParameter>("toggle", 0));*/
+Synth::Synth(std::string synthDef, SbMidi sbMidi) : m_sbMidi(sbMidi) { 
     std::ifstream f(synthDef);
     json synthData = json::parse(f);
     for (const auto section : synthData["parts"][0]["sections"]) {

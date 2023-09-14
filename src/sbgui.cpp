@@ -1,10 +1,4 @@
-#include <QGridLayout>
-#include <QLabel>
-#include <QSlider>
-#include <QCheckBox>
-#include <QComboBox>
 #include "sbgui.hpp"
-#include "parameter.hpp"
 
 SbGui::SbGui(Synth synth) : m_synth(synth) {
     QVBoxLayout* layout = new QVBoxLayout(this);

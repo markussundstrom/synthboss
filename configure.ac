@@ -19,6 +19,7 @@ AC_PATH_PROG([MOC], [moc])
 AC_SUBST([MOC])
 # Checks for header files.
 PKG_CHECK_MODULES([JSON], [nlohmann_json])
+PKG_CHECK_MODULES([JACK], [jack >= 1.9.0])
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_UINT8_T
 

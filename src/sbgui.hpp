@@ -1,10 +1,14 @@
 #pragma once
 #include <QMainWindow>
 #include <QWidget>
+#include <QGridLayout>
+#include <QLabel>
+#include <QSlider>
+#include <QCheckBox>
+#include <QComboBox>
 #include "synth.hpp"
 #include "parameter.hpp"
 
-class Parameter;
 
 class SbGui : public QWidget {
     Q_OBJECT
@@ -17,4 +21,3 @@ class SbGui : public QWidget {
         QWidget* createParameterWidget(const std::shared_ptr<Parameter>& parameter);
         Synth m_synth;
 };
-
