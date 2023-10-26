@@ -23,6 +23,12 @@
                     "name": {
                         "type": "string"
                     },
+                    "channel": {
+                        "type": "integer"
+                    },
+                    "messageformat": {
+                        "type": "string"
+                    },
                     "sections": {
                         "type": "array",
                         "items": {
@@ -38,6 +44,9 @@
                                         "properties": {
                                             "name": {
                                                 "type": "string"
+                                            },
+                                            "parameternumber": {
+                                                "type": "integer"
                                             },
                                             "class": {
                                                 "type": "string",
@@ -78,6 +87,9 @@
                                                 },
                                                 "then": {
                                                     "properties": {
+                                                        "on": {
+                                                            "type": "integer"
+                                                        }
                                                     }
                                                 }
                                             },
