@@ -2,6 +2,7 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QGridLayout>
+#include <QGroupBox>
 #include <QLabel>
 #include <QSlider>
 #include <QCheckBox>
@@ -14,10 +15,11 @@ class SbGui : public QWidget {
     Q_OBJECT
 
     public:
-        SbGui(Synth synth);
+        SbGui();
         virtual ~SbGui() override;
+        void buildSynthGui(Synth synth);
 
     private:
         QWidget* createParameterWidget(const std::shared_ptr<Parameter>& parameter);
-        Synth m_synth;
+        QTabWidget* tabWidget;
 };

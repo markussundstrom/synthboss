@@ -6,16 +6,50 @@
 #include <nlohmann/json.hpp>
 #include "parameter.hpp"
 #include "sbmidi.hpp"
+#include "observer.hpp"
 
 using json = nlohmann::json;
 
-class Synth {
+
+class Section {
     public:
-        Synth(std::string synthDef, SbMidi sbMidi);
+        Section(std::string name);
+        void addParameter(std::shared_ptr<Parameter> parameter);
+        std::string getName() const;
         const std::vector<std::shared_ptr<Parameter>>& getParameters() const;
 
     private:
-        SbMidi m_sbMidi;
         std::vector<std::shared_ptr<Parameter>> m_parameters;
+        std::string m_name;
+};
+
+
+class Part : public ParameterObserver {
+    public:
+        Part(std::string name);
+        void addObserver(std::shared_ptr<PartObserver> observer);
+        void valueChanged(Parameter* parameter) override;
+        void addSection(std::shared_ptr<Section> section);
+        std::string getName() const;
+        const std::vector<std::shared_ptr<Section>>& getSections() const;
+
+    private:
+        void notifyObservers(std::string message);
+        std::string m_name;
+        std::vector<std::shared_ptr<Section>> m_sections;
+        std::vector<std::shared_ptr<PartObserver>> m_observers;
+};
+
+
+class Synth : public PartObserver, public std::enable_shared_from_this<Synth> {
+    public:
+        static Synth buildSynth(std::string syntDef, SbMidi sbMidi);
+        Synth(SbMidi sbMidi);
+        void messageCreated(std::string message) override;
+        const std::vector<std::shared_ptr<Part>>& getParts() const;
+
+    private:
+        SbMidi m_sbMidi;
+        std::vector<std::shared_ptr<Part>> m_parts;
         std::shared_ptr<Parameter> buildParameter(json param);
 };

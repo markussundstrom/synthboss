@@ -5,18 +5,25 @@
 #include <cstdint>
 #include <nlohmann/json.hpp>
 #include <map>
+#include "observer.hpp"
 
 using json = nlohmann::json;
 
 class Parameter {
     private:
         std::string m_name;
+        std::vector<std::shared_ptr<ParameterObserver>> m_observers;
+
+    protected:
+        void notifyObservers();
         uint8_t m_value;
 
     public:
         Parameter();
         Parameter(const std::string& name, uint8_t value);
         virtual ~Parameter() = default;
+        void addObserver(std::shared_ptr<ParameterObserver> observer);
+        virtual void setValue(int value);
         const std::string& name() const;
         uint8_t value() const;
 };
@@ -33,8 +40,12 @@ class RangeParameter : public Parameter {
 };
 
 class ToggleParameter : public Parameter {
+    private:
+        int m_on;
+
     public:
         ToggleParameter(const json param);
+        void setValue(int state) override;
 };
 
 class SelectParameter : public Parameter {

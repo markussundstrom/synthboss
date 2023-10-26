@@ -11,8 +11,9 @@ int main(int argc, char **argv)
     SbMidi sbMidi;
     //FIXME decide on configuration to load
     std::string synthConfig = "mks7.json";
-    Synth synth(synthConfig, sbMidi);
-    SbGui sbGui(synth);
+    Synth synth = Synth::buildSynth(synthConfig, sbMidi);
+    SbGui sbGui;
+    sbGui.buildSynthGui(synth);
     sbGui.show();
     return app.exec();
 }

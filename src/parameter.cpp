@@ -6,6 +6,21 @@ Parameter::Parameter()
 Parameter::Parameter(const std::string& name, uint8_t value)
     : m_name{name}, m_value{value} {}
 
+void Parameter::notifyObservers() {
+    for (auto observer : m_observers) {
+        observer->valueChanged(this);
+    }
+}
+
+void Parameter::addObserver(std::shared_ptr<ParameterObserver> observer) {
+    m_observers.push_back(observer);
+}
+
+void Parameter::setValue(int value) {
+    m_value = value;
+    notifyObservers();
+}
+
 const std::string& Parameter::name() const {
     return m_name;
 }
@@ -27,7 +42,13 @@ int RangeParameter::max() const {
 }
 
 ToggleParameter::ToggleParameter(const json param)
-    : Parameter{param["name"], param["value"]} {}
+    : Parameter{param["name"], param["value"]},
+      m_on{param["on"]} {}
+
+void ToggleParameter::setValue(int state) {
+    m_value = (state) ? m_on : 0;
+    notifyObservers();
+}
 
 SelectParameter::SelectParameter(const json param)
     : Parameter{param["name"], param["value"]}, m_choices{} {
