@@ -6,6 +6,8 @@
         {
             "name": "Melody",
             "channel": 1,
+            "channeloffset": -1,
+            "messageformat": "F0 41 32 {channel} {parameter} {value} F7",
             "sections": [
                 {
                     "name": "DCO",
@@ -18,15 +20,15 @@
                             "choices": [
                                 {
                                     "name": "4'",
-                                    "value": 1
+                                    "optionvalue": 1
                                 },
                                 {
                                     "name": "8'",
-                                    "value": 2
+                                    "optionvalue": 2
                                 },
                                 {
                                     "name": "16'",
-                                    "value": 4
+                                    "optionvalue": 4
                                 }
                             ]
                         }

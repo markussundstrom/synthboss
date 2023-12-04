@@ -26,6 +26,9 @@
                     "channel": {
                         "type": "integer"
                     },
+                    "channeloffset": {
+                        "type": "integer"
+                    },
                     "messageformat": {
                         "type": "string"
                     },
@@ -110,6 +113,9 @@
                                                                 "properties": {
                                                                     "name": {
                                                                         "type": "string"
+                                                                    },
+                                                                    "optionvalue": {
+                                                                        "type": "integer"
                                                                     }
                                                                 }
                                                             }
