@@ -10,5 +10,5 @@ class ParameterObserver {
 
 class PartObserver {
     public:
-        virtual void messageCreated(std::string message) = 0;
+        virtual void messageCreated(std::vector<char> message) = 0;
 };

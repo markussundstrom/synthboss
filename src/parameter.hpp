@@ -12,6 +12,7 @@ using json = nlohmann::json;
 class Parameter {
     private:
         std::string m_name;
+        uint8_t m_pNumber;
         std::vector<std::shared_ptr<ParameterObserver>> m_observers;
 
     protected:
@@ -20,11 +21,12 @@ class Parameter {
 
     public:
         Parameter();
-        Parameter(const std::string& name, uint8_t value);
+        Parameter(const std::string& name, uint8_t pNumber, uint8_t value);
         virtual ~Parameter() = default;
         void addObserver(std::shared_ptr<ParameterObserver> observer);
         virtual void setValue(int value);
         const std::string& name() const;
+        uint8_t parameterNumber() const;
         uint8_t value() const;
 };
 

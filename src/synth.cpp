@@ -7,7 +7,11 @@ Synth Synth::buildSynth(std::string synthDef, SbMidi sbMidi) {
     std::ifstream f(synthDef);
     json synthData = json::parse(f);
     for (const auto& jPart : synthData["parts"]) {
-        std::shared_ptr<Part> part = std::make_shared<Part>(jPart["name"]);
+        std::shared_ptr<Part> part = std::make_shared<Part>(jPart["name"],
+                jPart["channel"].template get<uint8_t>(),
+                jPart["channeloffset"], 
+                jPart["messageformat"]);
+        part->printInfo();
         synth.m_parts.push_back(part);
         part->addObserver(synthPtr);
         for (const auto& jSection : jPart["sections"]) {
@@ -84,14 +88,16 @@ std::shared_ptr<Parameter> Synth::buildParameter(json param) {
     return paramPointer;
 }
 
-void Synth::messageCreated(std::string message) {
-    std::cout << message << std::endl;
+void Synth::messageCreated(std::vector<char> message) {
+    m_sbMidi.TransmitMessage(message);
 }
 
-Part::Part(std::string name)
-    : m_name{name} {}
+Part::Part(std::string name, uint8_t channel, int channelOffset, 
+        std::string messageFormat)
+    : m_name{name}, m_channel{channel}, m_channelOffset{channelOffset}, 
+      m_messageFormat{messageFormat} {}
 
-void Part::notifyObservers(std::string message) {
+void Part::notifyObservers(std::vector<char>  message) {
     for (auto observer : m_observers) {
         observer->messageCreated(message);
     }
@@ -101,10 +107,33 @@ void Part::addObserver(std::shared_ptr<PartObserver> observer) {
     m_observers.push_back(observer);
 }
 
+void Part::printInfo() {
+    std::cout << m_name << " " << m_channel << " " << m_channelOffset << std::endl;
+}
+
 void Part::valueChanged(Parameter* parameter) {
-    std::cout << m_name << " " << parameter->name() << " " << parameter->value() << std::endl;
-    notifyObservers("message from part");
-    //create midi message, notify synth
+    std::vector<char> message;
+    int start, end = -1;
+    do {
+        start = end + 1;
+        end = m_messageFormat.find(" ", start);
+        std::string current = m_messageFormat.substr(start, end - start);
+        unsigned char byte;
+        if (sscanf(current.c_str(), "%hhx", &byte)) {
+            ;
+        } else if (current == "{channel}") {
+            byte = m_channel + m_channelOffset;
+        } else if (current == "{parameter}") {
+            byte = parameter->parameterNumber();
+        } else if (current == "{value}") {
+            byte = parameter->value();
+        } else {
+            std::cerr << "Error when constructing MIDI message" << std::endl;
+            continue;
+        }
+        message.push_back(byte);
+    } while (end != -1);
+    notifyObservers(message);
 }
 
 void Part::addSection(std::shared_ptr<Section> section) {
