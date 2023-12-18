@@ -1,0 +1,118 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "synth-definition",
+    "title": "iSynthboss synth configuration schema",
+    "description": "Declaration of a synth's parameters",
+    "type": "object",
+    "properties": {
+        "manufacturer": {
+            "type": "string"
+        },
+        "model": {
+            "type": "string"
+        },
+        "shortname": {
+            "type": "string",
+            "pattern": "^[a-z0-9]{3,}$"
+        },
+        "parts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "channel": {
+                        "type": "integer"
+                    },
+                    "channeloffset": {
+                        "type": "integer"
+                    },
+                    "messageformat": {
+                        "type": "string"
+                    },
+                    "sections": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "parameters": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "parameternumber": {
+                                                "type": "integer"
+                                            },
+                                            "class": {
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "type": "integer"
+                                            },
+                                            "min": {
+                                                "type": "integer"
+                                            },
+                                            "max": {
+                                                "type": "integer"
+                                            },
+                                            "on": {
+                                                "type": "integer"
+                                            },
+                                            "off": {
+                                                "type": "integer"
+                                            },
+                                            "choices": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "optionvalue": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "dependencies": {
+                                            "class": {
+                                                "oneOf": [
+                                                    {
+                                                        "properties": {"class": {"enum": ["range"]}},
+                                                        "required": ["min", "max"]
+                                                    },
+                                                    {
+                                                        "properties": {"class": {"enum": ["toggle"]}},
+                                                        "required": ["on", "off"]
+                                                    },
+                                                    {
+                                                        "properties": {"class": {"enum": ["select"]}},
+                                                        "required": ["choices"]
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "required": [ "name", "parameternumber", "class", "value" ]
+                                    }
+                                }
+                            },
+                            "required": [ "parameters" ]
+                        }
+                    }
+                },
+                "required": [ "messageformat", "channel", "sections" ]
+            }
+        }
+    },
+    "required": [ "manufacturer", "model", "shortname" ]
+}
