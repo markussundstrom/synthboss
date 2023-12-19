@@ -4,8 +4,8 @@
     "shortname": "mks7",
     "parts": [
         {
-            "name": "Melody",
-            "channel": 1,
+            "name": "Bass",
+            "channel": 2,
             "channeloffset": -1,
             "messageformat": "F0 41 32 {channel} {parameter} {value} F7",
             "sections": [
@@ -13,13 +13,157 @@
                     "name": "DCO",
                     "parameters": [
                         {
-                            "name": "Range",
+                            "name": "PWM",
+                            "parameternumber": 3,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "Wave select",
                             "parameternumber": 16,
                             "class": "select",
-                            "value": 1,
                             "choices": [
                                 {
-                                    "name": "4'",
+                                    "name": "Pulse",
+                                    "optionvalue": 0
+                                },
+                                {
+                                    "name": "Saw",
+                                    "optionvalue": 16
+                                }
+                            ],
+                            "value": 16
+                        }
+                    ]
+                },
+                {
+                    "name": "VCF",
+                    "parameters": [
+                        {
+                            "name": "FREQ",
+                            "parameternumber": 5,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 127
+                        },
+                        {
+                            "name": "RES",
+                            "parameternumber": 6,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "ENV",
+                            "parameternumber": 7,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "KYBD",
+                            "parameternumber": 9,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "VCA",
+                    "parameters": [
+                        {
+                            "name": "LEVEL",
+                            "parameternumber": 10,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 100
+                        }
+                    ]
+                },
+                {
+                    "name": "ENV",
+                    "parameters": [
+                        {
+                            "name": "A",
+                            "parameternumber": 11,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "D",
+                            "parameternumber": 12,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "S",
+                            "parameternumber": 13,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 127
+                        },
+                        {
+                            "name": "R",
+                            "parameternumber": 14,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Chord",
+            "channel": 3,
+            "channeloffset": -1,
+            "messageformat": "F0 41 32 {channel} {parameter} {value} F7",
+            "sections": [
+                {
+                    "name": "LFO",
+                    "parameters": [
+                        {
+                            "name": "RATE",
+                            "parameternumber": 0,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "DELAY TIME",
+                            "parameternumber": 1,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "DCO",
+                    "parameters": [
+                        {
+                            "name": "RANGE",
+                            "parameternumber": 16,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "16'",
                                     "optionvalue": 1
                                 },
                                 {
@@ -27,10 +171,51 @@
                                     "optionvalue": 2
                                 },
                                 {
-                                    "name": "16'",
+                                    "name": "4'",
                                     "optionvalue": 4
                                 }
-                            ]
+                            ],
+                            "value": 4
+                        },
+                        {
+                            "name": "LFO",
+                            "parameternumber": 2,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "PWM",
+                            "parameternumber": 3,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "Pulse",
+                            "parameternumber": 16,
+                            "class": "toggle",
+                            "on": 8,
+                            "off": 0,
+                            "value": 0
+                        },
+                        {
+                            "name": "Saw",
+                            "parameternumber": 16,
+                            "class": "toggle",
+                            "on": 16,
+                            "off": 0,
+                            "value": 16
+                        },
+                        {
+                            "name": "SUB",
+                            "parameternumber": 15,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
                         }
                     ]
                 },
@@ -41,24 +226,420 @@
                             "name": "HPF",
                             "parameternumber": 17,
                             "class": "toggle",
-                            "on": 16,
+                            "on": 0,
+                            "off": 16,
                             "value": 0
                         },
                         {
-                            "name": "Cutoff",
+                            "name": "FREQ",
                             "parameternumber": 5,
                             "class": "range",
-                            "value": 0,
+                            "min": 0,
                             "max": 127,
-                            "min": 0
+                            "value": 127
                         },
                         {
-                            "name": "Resonance",
+                            "name": "RES",
                             "parameternumber": 6,
                             "class": "range",
-                            "value": 0,
+                            "min": 0,
                             "max": 127,
-                            "min": 0
+                            "value": 0
+                        },
+                        {
+                            "name": "ENV POL",
+                            "parameternumber": 17,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "+",
+                                    "optionvalue": 0
+                                },
+                                {
+                                    "name": "-",
+                                    "optionvalue": 2
+                                }
+                            ],
+                            "value": 0
+                        },
+                        {
+                            "name": "ENV",
+                            "parameternumber": 7,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "KYBD",
+                            "parameternumber": 9,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "VCA",
+                    "parameters": [
+                        {
+                            "name": "VCA",
+                            "parameternumber": 17,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "ENV",
+                                    "optionvalue": 0
+                                },
+                                {
+                                    "name": "GATE",
+                                    "optionvalue": 4
+                                }
+                            ],
+                            "value": 0
+                        },
+                        {
+                            "name": "LEVEL",
+                            "parameternumber": 10,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 100
+                        }
+                    ]
+                },
+                {
+                    "name": "ENV",
+                    "parameters": [
+                        {
+                            "name": "A",
+                            "parameternumber": 11,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "D",
+                            "parameternumber": 12,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "S",
+                            "parameternumber": 13,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 127
+                        },
+                        {
+                            "name": "R",
+                            "parameternumber": 14,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "CHORUS",
+                    "parameters": [
+                        {
+                            "name": "CHORUS",
+                            "parameternumber": 16,
+                            "class": "toggle",
+                            "on": 0,
+                            "off": 32,
+                            "value": 32
+                        }
+                    ]
+                },
+                {
+                    "name": "DYN AFFECTION",
+                    "parameters": [
+                        {
+                            "name": "VCF",
+                            "parameternumber": 4,
+                            "class": "toggle",
+                            "on": 64,
+                            "off": 0,
+                            "value": 0
+                        },
+                        {
+                            "name": "VCA",
+                            "parameternumber": 4,
+                            "class": "toggle",
+                            "on": 32,
+                            "off": 0,
+                            "value": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Melody",
+            "channel": 1,
+            "channeloffset": -1,
+            "messageformat": "F0 41 32 {channel} {parameter} {value} F7",
+            "sections": [
+                {
+                    "name": "LFO",
+                    "parameters": [
+                        {
+                            "name": "RATE",
+                            "parameternumber": 0,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "DELAY TIME",
+                            "parameternumber": 1,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "DCO",
+                    "parameters": [
+                        {
+                            "name": "RANGE",
+                            "parameternumber": 16,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "16'",
+                                    "optionvalue": 1
+                                },
+                                {
+                                    "name": "8'",
+                                    "optionvalue": 2
+                                },
+                                {
+                                    "name": "4'",
+                                    "optionvalue": 4
+                                }
+                            ],
+                            "value": 4
+                        },
+                        {
+                            "name": "LFO",
+                            "parameternumber": 2,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "PWM",
+                            "parameternumber": 3,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "Pulse",
+                            "parameternumber": 16,
+                            "class": "toggle",
+                            "on": 8,
+                            "off": 0,
+                            "value": 0
+                        },
+                        {
+                            "name": "Saw",
+                            "parameternumber": 16,
+                            "class": "toggle",
+                            "on": 16,
+                            "off": 0,
+                            "value": 16
+                        },
+                        {
+                            "name": "SUB",
+                            "parameternumber": 15,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "NOISE",
+                            "parameternumber": 17,
+                            "class": "toggle",
+                            "on": 32,
+                            "off": 0,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "VCF",
+                    "parameters": [
+                        {
+                            "name": "HPF",
+                            "parameternumber": 17,
+                            "class": "toggle",
+                            "on": 0,
+                            "off": 16,
+                            "value": 0
+                        },
+                        {
+                            "name": "FREQ",
+                            "parameternumber": 5,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 127
+                        },
+                        {
+                            "name": "RES",
+                            "parameternumber": 6,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "ENV POL",
+                            "parameternumber": 17,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "+",
+                                    "optionvalue": 0
+                                },
+                                {
+                                    "name": "-",
+                                    "optionvalue": 2
+                                }
+                            ],
+                            "value": 0
+                        },
+                        {
+                            "name": "ENV",
+                            "parameternumber": 7,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "KYBD",
+                            "parameternumber": 9,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "VCA",
+                    "parameters": [
+                        {
+                            "name": "VCA",
+                            "parameternumber": 17,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "ENV",
+                                    "optionvalue": 0
+                                },
+                                {
+                                    "name": "GATE",
+                                    "optionvalue": 4
+                                }
+                            ],
+                            "value": 0
+                        },
+                        {
+                            "name": "LEVEL",
+                            "parameternumber": 10,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 100
+                        }
+                    ]
+                },
+                {
+                    "name": "ENV",
+                    "parameters": [
+                        {
+                            "name": "A",
+                            "parameternumber": 11,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "D",
+                            "parameternumber": 12,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "S",
+                            "parameternumber": 13,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 127
+                        },
+                        {
+                            "name": "R",
+                            "parameternumber": 14,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "CHORUS",
+                    "parameters": [
+                        {
+                            "name": "CHORUS",
+                            "parameternumber": 16,
+                            "class": "toggle",
+                            "on": 0,
+                            "off": 32,
+                            "value": 32
+                        }
+                    ]
+                },
+                {
+                    "name": "DYN AFFECTION",
+                    "parameters": [
+                        {
+                            "name": "VCF",
+                            "parameternumber": 4,
+                            "class": "toggle",
+                            "on": 64,
+                            "off": 0,
+                            "value": 0
+                        },
+                        {
+                            "name": "VCA",
+                            "parameternumber": 4,
+                            "class": "toggle",
+                            "on": 32,
+                            "off": 0,
+                            "value": 0
                         }
                     ]
                 }
