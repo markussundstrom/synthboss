@@ -54,6 +54,9 @@
                                             "class": {
                                                 "type": "string"
                                             },
+                                            "coherence": {
+                                                "type": "integer"
+                                            },
                                             "value": {
                                                 "type": "integer"
                                             },
