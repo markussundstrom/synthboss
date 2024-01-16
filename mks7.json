@@ -161,6 +161,7 @@
                             "name": "RANGE",
                             "parameternumber": 16,
                             "class": "select",
+                            "coherence": 16,
                             "choices": [
                                 {
                                     "name": "16'",
@@ -187,6 +188,23 @@
                         },
                         {
                             "name": "PWM",
+                            "parameternumber": 17,
+                            "class": "select",
+                            "coherence": 17,
+                            "choices": [
+                                {
+                                    "name": "MAN",
+                                    "optionvalue": 1
+                                },
+                                {
+                                    "name": "LFO",
+                                    "optionvalue": 0
+                                }
+                            ],
+                            "value": 1
+                        },
+                        {
+                            "name": "PWM",
                             "parameternumber": 3,
                             "class": "range",
                             "min": 0,
@@ -197,6 +215,7 @@
                             "name": "Pulse",
                             "parameternumber": 16,
                             "class": "toggle",
+                            "coherence": 16,
                             "on": 8,
                             "off": 0,
                             "value": 0
@@ -205,6 +224,7 @@
                             "name": "Saw",
                             "parameternumber": 16,
                             "class": "toggle",
+                            "coherence": 16,
                             "on": 16,
                             "off": 0,
                             "value": 16
@@ -226,6 +246,7 @@
                             "name": "HPF",
                             "parameternumber": 17,
                             "class": "toggle",
+                            "coherence": 17,
                             "on": 0,
                             "off": 16,
                             "value": 0
@@ -250,6 +271,7 @@
                             "name": "ENV POL",
                             "parameternumber": 17,
                             "class": "select",
+                            "coherence": 17,
                             "choices": [
                                 {
                                     "name": "+",
@@ -287,6 +309,7 @@
                             "name": "VCA",
                             "parameternumber": 17,
                             "class": "select",
+                            "coherence": 17,
                             "choices": [
                                 {
                                     "name": "ENV",
@@ -353,6 +376,7 @@
                             "name": "CHORUS",
                             "parameternumber": 16,
                             "class": "toggle",
+                            "coherence": 16,
                             "on": 0,
                             "off": 32,
                             "value": 32
@@ -366,6 +390,7 @@
                             "name": "VCF",
                             "parameternumber": 4,
                             "class": "toggle",
+                            "coherence": 4,
                             "on": 64,
                             "off": 0,
                             "value": 0
@@ -374,6 +399,7 @@
                             "name": "VCA",
                             "parameternumber": 4,
                             "class": "toggle",
+                            "coherence": 4,
                             "on": 32,
                             "off": 0,
                             "value": 0
@@ -416,6 +442,7 @@
                             "name": "RANGE",
                             "parameternumber": 16,
                             "class": "select",
+                            "coherence": 16,
                             "choices": [
                                 {
                                     "name": "16'",
@@ -442,6 +469,22 @@
                         },
                         {
                             "name": "PWM",
+                            "parameternumber": 17,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "MAN",
+                                    "optionvalue": 1
+                                },
+                                {
+                                    "name": "LFO",
+                                    "optionvalue": 0
+                                }
+                            ],
+                            "value": 1
+                        },
+                        {
+                            "name": "PWM",
                             "parameternumber": 3,
                             "class": "range",
                             "min": 0,
@@ -452,6 +495,7 @@
                             "name": "Pulse",
                             "parameternumber": 16,
                             "class": "toggle",
+                            "coherence": 16,
                             "on": 8,
                             "off": 0,
                             "value": 0
@@ -460,6 +504,7 @@
                             "name": "Saw",
                             "parameternumber": 16,
                             "class": "toggle",
+                            "coherence": 16,
                             "on": 16,
                             "off": 0,
                             "value": 16
@@ -476,6 +521,7 @@
                             "name": "NOISE",
                             "parameternumber": 17,
                             "class": "toggle",
+                            "coherence": 17,
                             "on": 32,
                             "off": 0,
                             "value": 0
@@ -489,6 +535,7 @@
                             "name": "HPF",
                             "parameternumber": 17,
                             "class": "toggle",
+                            "coherence": 17,
                             "on": 0,
                             "off": 16,
                             "value": 0
@@ -513,6 +560,7 @@
                             "name": "ENV POL",
                             "parameternumber": 17,
                             "class": "select",
+                            "coherence": 17,
                             "choices": [
                                 {
                                     "name": "+",
@@ -550,6 +598,7 @@
                             "name": "VCA",
                             "parameternumber": 17,
                             "class": "select",
+                            "coherence": 17,
                             "choices": [
                                 {
                                     "name": "ENV",
@@ -616,6 +665,7 @@
                             "name": "CHORUS",
                             "parameternumber": 16,
                             "class": "toggle",
+                            "coherence": 16,
                             "on": 0,
                             "off": 32,
                             "value": 32
@@ -629,6 +679,7 @@
                             "name": "VCF",
                             "parameternumber": 4,
                             "class": "toggle",
+                            "coherence": 4,
                             "on": 64,
                             "off": 0,
                             "value": 0
@@ -637,6 +688,7 @@
                             "name": "VCA",
                             "parameternumber": 4,
                             "class": "toggle",
+                            "coherence": 4,
                             "on": 32,
                             "off": 0,
                             "value": 0
