@@ -18,16 +18,19 @@ class Parameter {
     protected:
         void notifyObservers();
         uint8_t m_value;
+        int m_coherence;
 
     public:
         Parameter();
-        Parameter(const std::string& name, uint8_t pNumber, uint8_t value);
+        Parameter(const std::string& name, uint8_t pNumber, uint8_t value, 
+                int coherence);
         virtual ~Parameter() = default;
         void addObserver(std::shared_ptr<ParameterObserver> observer);
         virtual void setValue(int value);
         const std::string& name() const;
         uint8_t parameterNumber() const;
         uint8_t value() const;
+        int coherence() const;
 };
 
 class RangeParameter : public Parameter {

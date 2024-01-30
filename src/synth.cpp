@@ -126,7 +126,18 @@ void Part::valueChanged(Parameter* parameter) {
         } else if (current == "{parameter}") {
             byte = parameter->parameterNumber();
         } else if (current == "{value}") {
-            byte = parameter->value();
+            if (parameter->coherence()) {
+                byte = 0;
+                for (const auto& s : m_sections) {
+                    for (const auto& p : s->getParameters()) {
+                        if (parameter->coherence() == p->coherence()) {
+                            byte += p->value();
+                        }
+                    }
+                }
+            } else {
+                byte = parameter->value();
+            }
         } else {
             std::cerr << "Error when constructing MIDI message" << std::endl;
             continue;
