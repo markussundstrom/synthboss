@@ -59,10 +59,10 @@ ToggleParameter::ToggleParameter(const json param)
         param["name"], param["parameternumber"], param["value"],
         param.contains("coherence") ?  param["coherence"].get<int>() : 0
     },
-    m_on{param["on"]} {}
+    m_on{param["on"]}, m_off{param["off"]} {}
 
 void ToggleParameter::setValue(int state) {
-    m_value = (state) ? m_on : 0;
+    m_value = (state) ? m_on : m_off;
     notifyObservers();
 }
 

@@ -47,6 +47,7 @@ class RangeParameter : public Parameter {
 class ToggleParameter : public Parameter {
     private:
         int m_on;
+        int m_off;
 
     public:
         ToggleParameter(const json param);
