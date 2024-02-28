@@ -1,5 +1,6 @@
 AM_CXXFLAGS = @QT_CXXFLAGS@
 QT_LIBS = @QT_LIBS@
+AM_CPPFLAGS = -DPKG_DATA_DIR='"$(pkgdatadir)"'
 bin_PROGRAMS = synthboss
 sbgui.moc.cpp: sbgui.hpp
 	$(MOC) $< -o $@
