@@ -50,6 +50,7 @@ class Part : public ParameterObserver {
 class Synth : public PartObserver, public std::enable_shared_from_this<Synth> {
     public:
         static Synth buildSynth(std::string syntDef, SbMidi sbMidi);
+        static std::string getFullName(std::string synthDef);
         Synth(SbMidi sbMidi);
         void messageCreated(std::vector<char> message) override;
         const std::vector<std::shared_ptr<Part>>& getParts() const;

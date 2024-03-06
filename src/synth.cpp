@@ -29,6 +29,15 @@ Synth Synth::buildSynth(std::string synthDef, SbMidi sbMidi) {
 }
 
 
+Synth::getFullName(std::string synthDef) {
+    std::ifstream f(synthDef);
+    json synthData = json::parse(f);
+    if (synthData.contains("manufacturer") && synthData.contains("model")) {
+        return synthData['manufacturer'] + " " + synthData['model'];
+    } else {
+        return "";
+    }
+}
 
     
 
