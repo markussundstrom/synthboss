@@ -39,6 +39,18 @@ Synth::getFullName(std::string synthDef) {
     }
 }
 
+
+Synth::getShortName(std::string synthDef) {
+    std::ifstream f(synthDef);
+    json synthData = json::parse(f);
+    if (synthData.contains("shortname")) {
+        return synthData['shortname'];
+    } else {
+        return "";
+    }
+}
+
+
     
 
 Synth::Synth(SbMidi sbMidi) : m_sbMidi{sbMidi} { 
