@@ -29,22 +29,23 @@ Synth Synth::buildSynth(std::string synthDef, SbMidi sbMidi) {
 }
 
 
-Synth::getFullName(std::string synthDef) {
+std::string Synth::getFullName(std::string synthDef) {
     std::ifstream f(synthDef);
     json synthData = json::parse(f);
     if (synthData.contains("manufacturer") && synthData.contains("model")) {
-        return synthData['manufacturer'] + " " + synthData['model'];
+        return to_string(synthData["manufacturer"]) + " " + 
+            to_string(synthData["model"]);
     } else {
         return "";
     }
 }
 
 
-Synth::getShortName(std::string synthDef) {
+std::string Synth::getShortName(std::string synthDef) {
     std::ifstream f(synthDef);
     json synthData = json::parse(f);
     if (synthData.contains("shortname")) {
-        return synthData['shortname'];
+        return synthData["shortname"];
     } else {
         return "";
     }

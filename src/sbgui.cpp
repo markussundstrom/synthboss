@@ -50,6 +50,7 @@ void SbGui::buildSynthGui(Synth synth) {
     }
 } 
 
+
 void SbGui::addParameterWidget(const std::shared_ptr<Parameter>& parameter,
         QFormLayout* layout) {
     QWidget* widget = nullptr;
@@ -83,10 +84,6 @@ void SbGui::addParameterWidget(const std::shared_ptr<Parameter>& parameter,
     layout->addRow(QString::fromStdString(parameter->name()), widget);
     return;
 }
-
-
-
-
 
 
 QWidget* SbGui::createParameterWidget(const std::shared_ptr<Parameter>& parameter) {
@@ -125,4 +122,64 @@ QWidget* SbGui::createParameterWidget(const std::shared_ptr<Parameter>& paramete
     parameterWidget->setLayout(layout);
     return parameterWidget;
 }
+
+
+//void SbGui::acceptSynthSelection() {
+//if (tableWidget->selectedItems().isEmpty) {
+//emit synthSelected(-1);
+//} else {
+//emit synthSelected(tableWidget->currentRow());
+//}
+//dialog->accept();
+//}
+//
+//
+//void SbGui::rejectSynthSelection() {
+//emit synthSelected(-1);
+//dialog->reject();
+//}
+
+
+std::string SbGui::synthSelectionWidget(std::map<std::string, std::array<std::string, 2>>& choices) {
+    std::string selected = "";
+    QDialog* dialog = new QDialog();
+    QVBoxLayout* layout = new QVBoxLayout(dialog);
+    QTableWidget* tableWidget = new QTableWidget(choices.size(), 3, dialog);
+    layout->addWidget(tableWidget);
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok |
+            QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
+    layout->addWidget(buttonBox);
+
+    QObject::connect(buttonBox, &QDialogButtonBox::accepted, [=, &selected]() mutable {
+            if (tableWidget->selectedItems().isEmpty()) {
+                selected= "";
+            } else {
+                selected = tableWidget->item(tableWidget->currentRow(), 0)->text().toStdString();
+                std::cout << selected << std::endl;
+            }
+            dialog->accept();
+    });
+    QObject::connect(buttonBox, &QDialogButtonBox::rejected, [=, &selected]() mutable {
+            selected = "";
+            dialog->reject();
+    });
+
+    int index = 0;
+    for (auto const& c : choices) {
+        tableWidget->setItem(index, 0, new QTableWidgetItem(QString::fromStdString(c.first)));
+        tableWidget->setItem(index, 1, new QTableWidgetItem(QString::fromStdString(c.second[0])));
+        tableWidget->setItem(index, 2, new QTableWidgetItem(QString::fromStdString(c.second[1])));
+        index++;
+    }
+       
+
+    dialog->exec();
+    std::cout << "selected after " << selected << std::endl;
+    delete dialog;
+    return selected;
+}
+    
+
+
+
 
