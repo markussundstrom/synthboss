@@ -33,7 +33,7 @@ int main(int argc, char **argv)
             std::string fullName = Synth::getFullName(fileWithPath);
             std::string shortName = Synth::getShortName(fileWithPath);
             if (!fullName.empty() && !shortName.empty()) {
-                synths[shortName] = {fullName, cfgFile->d_name};
+                synths[shortName] = {fullName, fileWithPath};
             }
         }
     }
