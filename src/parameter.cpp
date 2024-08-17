@@ -14,30 +14,37 @@ void Parameter::notifyObservers() {
     }
 }
 
+
 void Parameter::addObserver(std::shared_ptr<ParameterObserver> observer) {
     m_observers.push_back(observer);
 }
+
 
 void Parameter::setValue(int value) {
     m_value = value;
     notifyObservers();
 }
 
+
 const std::string& Parameter::name() const {
     return m_name;
 }
+
 
 uint8_t Parameter::parameterNumber() const {
     return m_pNumber;
 }
 
+
 uint8_t Parameter::value() const {
     return m_value;
 }
 
+
 int Parameter::coherence() const {
     return m_coherence;
 }
+
 
 RangeParameter::RangeParameter(const json param) 
     : Parameter {
@@ -46,13 +53,16 @@ RangeParameter::RangeParameter(const json param)
     },
     m_min{param["min"]}, m_max{param["max"]} {}
 
+
 int RangeParameter::min() const {
     return m_min;
 }
 
+
 int RangeParameter::max() const {
     return m_max;
 }
+
 
 ToggleParameter::ToggleParameter(const json param)
     : Parameter {
@@ -66,6 +76,7 @@ void ToggleParameter::setValue(int state) {
     notifyObservers();
 }
 
+
 SelectParameter::SelectParameter(const json param)
     : Parameter {
         param["name"], param["parameternumber"], param["value"], 
@@ -76,6 +87,7 @@ SelectParameter::SelectParameter(const json param)
             m_choices[choice["name"]] = choice["optionvalue"];
         }
     }
+
 
 std::map<std::string, uint8_t> SelectParameter::choices() const {
     return m_choices;

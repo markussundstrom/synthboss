@@ -33,8 +33,6 @@ class Part : public ParameterObserver {
         void addSection(std::shared_ptr<Section> section);
         std::string getName() const;
         const std::vector<std::shared_ptr<Section>>& getSections() const;
-        //FIXME
-        void printInfo();
 
     private:
         void notifyObservers(std::vector<char> message);

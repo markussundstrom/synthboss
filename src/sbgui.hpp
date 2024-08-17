@@ -21,18 +21,15 @@ class SbGui : public QWidget {
     public:
         SbGui();
         virtual ~SbGui() override;
-        static std::string synthSelectionWidget(std::map<std::string, std::array<std::string, 2>>& choices);
+        static std::string synthSelectionWidget(std::map<std::string, 
+                std::array<std::string, 2>>& choices);
         void buildSynthGui(Synth synth);
 
     private:
         void addParameterWidget(const std::shared_ptr<Parameter>& parameter,
                 QFormLayout* layout);
-        QWidget* createParameterWidget(const std::shared_ptr<Parameter>& parameter);
-        //void rejectSynthSelection();
-        //void acceptSynthSelection();
+        QWidget* createParameterWidget(const 
+                std::shared_ptr<Parameter>& parameter);
         QTabWidget* tabWidget;
         static int selectedIndex;
-
-        //signals:
-        //static void synthSelected(int index);
 };

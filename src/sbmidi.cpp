@@ -4,7 +4,6 @@ SbMidi::SbMidi() {
     jack_options_t options = JackNullOption;
     jack_status_t status;
 
-        
     m_client = jack_client_open("Synthboss", options, &status);
     if (m_client == nullptr) {
         std::cerr << "jack_client_open() failed. Status 0x" << status << std::endl;
@@ -33,10 +32,12 @@ SbMidi::SbMidi() {
     }
 }
 
+
 int SbMidi::ProcessWrapper(jack_nframes_t nframes, void* arg) {
     SbMidi* sbmidi = static_cast<SbMidi*>(arg);
     return sbmidi->process(nframes, 0);
 }
+
 
 int SbMidi::process(jack_nframes_t nframes, void* arg) {
     void* portBuf = jack_port_get_buffer(m_outputPort, nframes);
@@ -59,6 +60,7 @@ int SbMidi::process(jack_nframes_t nframes, void* arg) {
     return 0;
 }
 
+
 void SbMidi::TransmitMessage(std::vector<char> message) {
     int toWrite = message.size();
     if (toWrite <= jack_ringbuffer_write_space(m_ringbuffer)) {
@@ -70,10 +72,12 @@ void SbMidi::TransmitMessage(std::vector<char> message) {
     }
 }
 
+
 int SbMidi::SetupTxBufferWrapper(jack_nframes_t buffersize, void* arg) {
     SbMidi* sbmidi = static_cast<SbMidi*>(arg);
     return sbmidi->setupTxBuffer(buffersize, 0);
 }
+
 
 int SbMidi::setupTxBuffer(jack_nframes_t buffersize, void* arg) {
     m_maxTx = (31250 / (jack_get_sample_rate(m_client) / buffersize)) / 8;

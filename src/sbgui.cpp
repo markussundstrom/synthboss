@@ -1,17 +1,5 @@
 #include "sbgui.hpp"
 
-//SbGui::SbGui(Synth synth) : m_synth(synth) {
-//QVBoxLayout* layout = new QVBoxLayout(this);
-//const std::vector<std::shared_ptr<Parameter>>& parameters = synth.getParameters();
-//for (const auto& parameter : parameters) {
-//QWidget* parameterWidget = createParameterWidget(parameter);
-//layout->addWidget(parameterWidget);
-//}
-//setLayout(layout);
-//
-//}
-
-
 SbGui::SbGui() {
     tabWidget = new QTabWidget;
     QVBoxLayout* layout = new QVBoxLayout(this);
@@ -33,13 +21,10 @@ void SbGui::buildSynthGui(Synth synth) {
             part->getSections();
         for (const auto& section : sections) {
             QGroupBox* sectionBox = new QGroupBox(QString::fromStdString(section->getName()));
-            //QVBoxLayout* sectionLayout = new QVBoxLayout;
             QFormLayout* sectionLayout = new QFormLayout();
             const std::vector<std::shared_ptr<Parameter>>& parameters = 
                 section->getParameters();
             for (const auto& parameter : parameters) {
-                //QWidget* parameterWidget = createParameterWidget(parameter);
-                //sectionLayout->addWidget(parameterWidget);
                 addParameterWidget(parameter, sectionLayout);
             }
             sectionBox->setLayout(sectionLayout);
@@ -124,22 +109,6 @@ QWidget* SbGui::createParameterWidget(const std::shared_ptr<Parameter>& paramete
 }
 
 
-//void SbGui::acceptSynthSelection() {
-//if (tableWidget->selectedItems().isEmpty) {
-//emit synthSelected(-1);
-//} else {
-//emit synthSelected(tableWidget->currentRow());
-//}
-//dialog->accept();
-//}
-//
-//
-//void SbGui::rejectSynthSelection() {
-//emit synthSelected(-1);
-//dialog->reject();
-//}
-
-
 std::string SbGui::synthSelectionWidget(std::map<std::string, std::array<std::string, 2>>& choices) {
     std::string selected = "";
     QDialog* dialog = new QDialog();
@@ -155,7 +124,6 @@ std::string SbGui::synthSelectionWidget(std::map<std::string, std::array<std::st
                 selected= "";
             } else {
                 selected = tableWidget->item(tableWidget->currentRow(), 0)->text().toStdString();
-                std::cout << selected << std::endl;
             }
             dialog->accept();
     });
@@ -171,15 +139,7 @@ std::string SbGui::synthSelectionWidget(std::map<std::string, std::array<std::st
         tableWidget->setItem(index, 2, new QTableWidgetItem(QString::fromStdString(c.second[1])));
         index++;
     }
-       
-
     dialog->exec();
-    std::cout << "selected after " << selected << std::endl;
     delete dialog;
     return selected;
 }
-    
-
-
-
-

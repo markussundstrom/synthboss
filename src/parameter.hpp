@@ -33,6 +33,7 @@ class Parameter {
         int coherence() const;
 };
 
+
 class RangeParameter : public Parameter {
     private:
         int m_min;
@@ -44,6 +45,7 @@ class RangeParameter : public Parameter {
         int max() const;
 };
 
+
 class ToggleParameter : public Parameter {
     private:
         int m_on;
@@ -54,6 +56,7 @@ class ToggleParameter : public Parameter {
         void setValue(int state) override;
 };
 
+
 class SelectParameter : public Parameter {
     private:
         std::map<std::string, uint8_t> m_choices;
@@ -62,4 +65,3 @@ class SelectParameter : public Parameter {
         SelectParameter(const json param);
         std::map<std::string, uint8_t> choices() const;
 };
-
