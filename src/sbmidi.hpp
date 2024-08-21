@@ -14,9 +14,9 @@ class SbMidi {
 
     private:
         int process(jack_nframes_t nframes, void* arg);
-        int setupTxBuffer(jack_nframes_t buffersize, void* arg);
+        int setupTxBuffer(jack_nframes_t buffersize);
         jack_client_t* m_client;
         jack_port_t* m_outputPort;
         jack_ringbuffer_t* m_ringbuffer;
-        int m_maxTx;
+        size_t m_maxTx;
 };

@@ -44,7 +44,7 @@ int SbMidi::process(jack_nframes_t nframes, void* arg) {
     jack_midi_data_t* txBuffer;
     jack_midi_clear_buffer(portBuf);
     
-    int readspace = jack_ringbuffer_read_space(m_ringbuffer);
+    size_t readspace = jack_ringbuffer_read_space(m_ringbuffer);
     readspace = (readspace > m_maxTx) ? m_maxTx : readspace;
     if (readspace > 0) {
         if ((txBuffer = jack_midi_event_reserve(portBuf, 0, readspace))) {
@@ -62,7 +62,7 @@ int SbMidi::process(jack_nframes_t nframes, void* arg) {
 
 
 void SbMidi::TransmitMessage(std::vector<char> message) {
-    int toWrite = message.size();
+    size_t toWrite = message.size();
     if (toWrite <= jack_ringbuffer_write_space(m_ringbuffer)) {
         if ( toWrite > jack_ringbuffer_write(m_ringbuffer, &message[0], toWrite)) {
             std::cerr << "SbMidi: Error writing to ringbuffer" << std::endl;
@@ -75,11 +75,11 @@ void SbMidi::TransmitMessage(std::vector<char> message) {
 
 int SbMidi::SetupTxBufferWrapper(jack_nframes_t buffersize, void* arg) {
     SbMidi* sbmidi = static_cast<SbMidi*>(arg);
-    return sbmidi->setupTxBuffer(buffersize, 0);
+    return sbmidi->setupTxBuffer(buffersize);
 }
 
 
-int SbMidi::setupTxBuffer(jack_nframes_t buffersize, void* arg) {
+int SbMidi::setupTxBuffer(jack_nframes_t buffersize) {
     m_maxTx = (31250 / (jack_get_sample_rate(m_client) / buffersize)) / 8;
     return 0;
 }
