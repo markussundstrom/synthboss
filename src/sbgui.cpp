@@ -22,6 +22,7 @@ void SbGui::buildSynthGui(Synth synth) {
         for (const auto& section : sections) {
             QGroupBox* sectionBox = new QGroupBox(QString::fromStdString(section->getName()));
             QFormLayout* sectionLayout = new QFormLayout();
+            //sectionLayout->setSizeConstraint(QLayout::SetFixedSize);
             const std::vector<std::shared_ptr<Parameter>>& parameters = 
                 section->getParameters();
             for (const auto& parameter : parameters) {
@@ -30,6 +31,7 @@ void SbGui::buildSynthGui(Synth synth) {
             sectionBox->setLayout(sectionLayout);
             partLayout->addWidget(sectionBox);
         }
+        partLayout->addStretch();
         partPage->setLayout(partLayout);
         tabWidget->addTab(partPage, QString::fromStdString(part->getName()));
     }
