@@ -26,7 +26,7 @@ class Parameter {
                 int coherence);
         virtual ~Parameter() = default;
         void addObserver(std::shared_ptr<ParameterObserver> observer);
-        virtual void setValue(int value);
+        virtual void setValue(uint8_t value);
         const std::string& name() const;
         uint8_t parameterNumber() const;
         uint8_t value() const;
@@ -53,7 +53,8 @@ class ToggleParameter : public Parameter {
 
     public:
         ToggleParameter(const json param);
-        void setValue(int state) override;
+        void setValue(uint8_t state) override;
+        bool valueBool();
 };
 
 

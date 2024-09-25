@@ -23,6 +23,7 @@ Synth Synth::buildSynth(std::string synthDef, SbMidi sbMidi) {
                 std::shared_ptr<Parameter> param = synth.buildParameter(jParam);
                 param->addObserver(part);
                 section->addParameter(param);
+                param->setValue(param->value());
             }
         }
     }
@@ -68,6 +69,7 @@ std::shared_ptr<Parameter> Synth::buildParameter(json param) {
     } else {
         std::cerr << "Error parameter class: " << param["class"] << std::endl;
     }
+    std::cout << paramPointer->parameterNumber() << std::endl;
     return paramPointer;
 }
 

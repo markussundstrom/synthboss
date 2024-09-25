@@ -51,6 +51,7 @@ int main(int argc, char **argv)
     Synth synth = Synth::buildSynth(synthConfig, sbMidi);
     sbGui.buildSynthGui(synth);
     sbGui.show();
+    sbGui.syncFromBackend();
     return app.exec();
 }
 

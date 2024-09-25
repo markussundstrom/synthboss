@@ -24,6 +24,7 @@ class SbGui : public QWidget {
         static std::string synthSelectionWidget(std::map<std::string, 
                 std::array<std::string, 2>>& choices);
         void buildSynthGui(Synth synth);
+        void syncFromBackend();
 
     private:
         void addParameterWidget(const std::shared_ptr<Parameter>& parameter,
@@ -31,5 +32,6 @@ class SbGui : public QWidget {
         QWidget* createParameterWidget(const 
                 std::shared_ptr<Parameter>& parameter);
         QTabWidget* tabWidget;
+        std::map<std::shared_ptr<Parameter>, QWidget*> m_parameterMap;
         static int selectedIndex;
 };

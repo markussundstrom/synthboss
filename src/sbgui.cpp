@@ -38,6 +38,21 @@ void SbGui::buildSynthGui(Synth synth) {
 } 
 
 
+void SbGui::syncFromBackend() {
+    for (auto const& p  : this->m_parameterMap) {
+        if (auto rangeP = std::dynamic_pointer_cast<RangeParameter>(p.first)) {
+            static_cast<QSlider*>(p.second)->setValue(rangeP->value());
+        } else if (auto toggleP = std::dynamic_pointer_cast<ToggleParameter>(p.first)) {
+            static_cast<QCheckBox*>(p.second)->setChecked(toggleP->valueBool());
+        } else if (auto selectP = std::dynamic_pointer_cast<SelectParameter>(p.first)) {
+            int index  = static_cast<QComboBox*>(p.second)->findData(p.first->value());
+            static_cast<QComboBox*>(p.second)->setCurrentIndex(index);
+        } else {
+            std::cerr << "Unable to determine parameter class" << std::endl;
+        }
+    }
+}
+
 void SbGui::addParameterWidget(const std::shared_ptr<Parameter>& parameter,
         QFormLayout* layout) {
     QWidget* widget = nullptr;
@@ -68,6 +83,7 @@ void SbGui::addParameterWidget(const std::shared_ptr<Parameter>& parameter,
         std::cerr << "Unable to determine parameter class" << std::endl;
         return;
     }
+    m_parameterMap[parameter] = widget;
     layout->addRow(QString::fromStdString(parameter->name()), widget);
     return;
 }

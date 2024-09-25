@@ -20,7 +20,7 @@ void Parameter::addObserver(std::shared_ptr<ParameterObserver> observer) {
 }
 
 
-void Parameter::setValue(int value) {
+void Parameter::setValue(uint8_t value) {
     m_value = value;
     notifyObservers();
 }
@@ -71,9 +71,14 @@ ToggleParameter::ToggleParameter(const json param)
     },
     m_on{param["on"]}, m_off{param["off"]} {}
 
-void ToggleParameter::setValue(int state) {
+void ToggleParameter::setValue(uint8_t state) {
     m_value = (state) ? m_on : m_off;
     notifyObservers();
+}
+
+
+bool ToggleParameter::valueBool() {
+    return m_value == m_on;
 }
 
 
