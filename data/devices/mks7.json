@@ -293,6 +293,14 @@
                             "value": 0
                         },
                         {
+                            "name": "LFO",
+                            "parameternumber": 8,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
                             "name": "KYBD",
                             "parameternumber": 9,
                             "class": "range",
@@ -576,6 +584,14 @@
                         {
                             "name": "ENV",
                             "parameternumber": 7,
+                            "class": "range",
+                            "min": 0,
+                            "max": 127,
+                            "value": 0
+                        },
+                        {
+                            "name": "LFO",
+                            "parameternumber": 8,
                             "class": "range",
                             "min": 0,
                             "max": 127,
