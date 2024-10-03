@@ -89,7 +89,7 @@ SelectParameter::SelectParameter(const json param)
     },
     m_choices{} {
         for (const auto& choice : param["choices"]) {
-            m_choices[choice["name"]] = choice["optionvalue"];
+            m_choices[choice["name"]] = static_cast<uint8_t>(choice["optionvalue"]);
         }
     }
 

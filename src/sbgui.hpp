@@ -29,8 +29,6 @@ class SbGui : public QWidget {
     private:
         void addParameterWidget(const std::shared_ptr<Parameter>& parameter,
                 QFormLayout* layout);
-        QWidget* createParameterWidget(const 
-                std::shared_ptr<Parameter>& parameter);
         QTabWidget* tabWidget;
         std::map<std::shared_ptr<Parameter>, QWidget*> m_parameterMap;
         static int selectedIndex;

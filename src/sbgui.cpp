@@ -73,11 +73,17 @@ void SbGui::addParameterWidget(const std::shared_ptr<Parameter>& parameter,
         QComboBox* combobox = new QComboBox();
         for (const auto& c : selectP->choices()) {
             const std::string& choiceName = c.first;
-            uint8_t choiceValue = c.second;
+            int choiceValue = c.second;
             combobox->addItem(QString::fromStdString(choiceName), QVariant(choiceValue));
         }
         QObject::connect(combobox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                [selectP](int newValue) { selectP->setValue(newValue); });
+                [selectP, combobox]() { 
+                    QVariant varValue = combobox->currentData();
+                    if (varValue.isValid()) {
+                        uint8_t actualValue = varValue.toInt();
+                        selectP->setValue(actualValue);
+                    }
+        });                
         widget = combobox;
     } else {
         std::cerr << "Unable to determine parameter class" << std::endl;
@@ -86,44 +92,6 @@ void SbGui::addParameterWidget(const std::shared_ptr<Parameter>& parameter,
     m_parameterMap[parameter] = widget;
     layout->addRow(QString::fromStdString(parameter->name()), widget);
     return;
-}
-
-
-QWidget* SbGui::createParameterWidget(const std::shared_ptr<Parameter>& parameter) {
-    QHBoxLayout* layout = new QHBoxLayout;
-    QLabel* label = new QLabel(QString::fromStdString(parameter->name()));
-    QWidget* widget = nullptr;
-
-    if (auto rangeP = std::dynamic_pointer_cast<RangeParameter>(parameter)) {
-        QSlider* slider = new QSlider(Qt::Orientation::Horizontal);
-        slider->setMinimum(rangeP->min());
-        slider->setMaximum(rangeP->max());
-        QObject::connect(slider, &QSlider::valueChanged, 
-                [rangeP](int newValue) { rangeP->setValue(newValue); });
-        widget = slider;
-    } else if (auto toggleP = std::dynamic_pointer_cast<ToggleParameter>(parameter)) {
-        QCheckBox* checkbox = new QCheckBox("");
-        QObject::connect(checkbox, &QCheckBox::stateChanged,
-                [toggleP](int newValue) { toggleP->setValue(newValue); });
-        widget = checkbox;
-    } else if (auto selectP = std::dynamic_pointer_cast<SelectParameter>(parameter)) {
-        QComboBox* combobox = new QComboBox();
-        for (const auto& c : selectP->choices()) {
-            const std::string& choiceName = c.first;
-            uint8_t choiceValue = c.second;
-            combobox->addItem(QString::fromStdString(choiceName), QVariant(choiceValue));
-        }
-        QObject::connect(combobox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                [selectP](int newValue) { selectP->setValue(newValue); });
-        widget = combobox;
-    } else {
-        return nullptr;
-    }
-    layout->addWidget(label);
-    layout->addWidget(widget);
-    QWidget* parameterWidget = new QWidget();
-    parameterWidget->setLayout(layout);
-    return parameterWidget;
 }
 
 
