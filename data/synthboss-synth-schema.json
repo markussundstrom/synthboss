@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "synth-definition",
-    "title": "iSynthboss synth configuration schema",
+    "title": "Synthboss synth configuration schema",
     "description": "Declaration of a synth's parameters",
     "type": "object",
     "properties": {
@@ -30,7 +30,46 @@
                         "type": "integer"
                     },
                     "messageformat": {
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "op": {
+                                            "type": "string"
+                                        },
+                                        "arg1": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "integer"
+                                                },
+                                                {
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        },
+                                        "arg2": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "integer"
+                                                },
+                                                {
+                                                    "type": "string"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": ["op", "arg1", "arg2"]
+                                }
+                            ]
+                        }
                     },
                     "sections": {
                         "type": "array",
