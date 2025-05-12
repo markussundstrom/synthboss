@@ -26,9 +26,6 @@
                     "channel": {
                         "type": "integer"
                     },
-                    "channeloffset": {
-                        "type": "integer"
-                    },
                     "messageformat": {
                         "type": "array",
                         "items": {
