@@ -6,8 +6,7 @@
         {
             "name": "Bass",
             "channel": 2,
-            "channeloffset": -1,
-            "messageformat": "F0 41 32 {channel} {parameter} {value} F7",
+            "messageformat": [240, 65, 50, {"op": "add", "arg1": "channel", "arg2": 1}, "parameter", "value", 247],
             "sections": [
                 {
                     "name": "DCO",
@@ -131,7 +130,7 @@
             "name": "Chord",
             "channel": 3,
             "channeloffset": -1,
-            "messageformat": "F0 41 32 {channel} {parameter} {value} F7",
+            "messageformat": [240, 65, 50, {"op": "add", "arg1": "channel", "arg2": 1}, "parameter", "value", 247],
             "sections": [
                 {
                     "name": "LFO",
@@ -420,7 +419,7 @@
             "name": "Melody",
             "channel": 1,
             "channeloffset": -1,
-            "messageformat": "F0 41 32 {channel} {parameter} {value} F7",
+            "messageformat": [240, 65, 50, {"op": "add", "arg1": "channel", "arg2": 1}, "parameter", "value", 247],
             "sections": [
                 {
                     "name": "LFO",
