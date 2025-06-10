@@ -12,7 +12,7 @@ SbGui::~SbGui() {
 }
 
 
-void SbGui::buildSynthGui(Synth synth) {
+void SbGui::buildSynthGui(const Synth& synth) {
     const std::vector<std::shared_ptr<Part>>& parts = synth.getParts();
     for (const auto& part : parts) {
         QWidget* partPage = new QWidget;

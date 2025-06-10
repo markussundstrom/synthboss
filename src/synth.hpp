@@ -26,8 +26,7 @@ class Section {
 
 class Part : public ParameterObserver {
     public:
-        Part(std::string name, uint8_t channel, int channelOffset,
-                std::string messageFormat);
+        Part(std::string name, uint8_t channel, json messageFormat);
         void addObserver(std::shared_ptr<PartObserver> observer);
         void valueChanged(Parameter* parameter) override;
         void addSection(std::shared_ptr<Section> section);
@@ -36,10 +35,11 @@ class Part : public ParameterObserver {
 
     private:
         void notifyObservers(std::vector<char> message);
+        uint8_t parseValue(Parameter* parameter, const json& messagePart);
+        uint8_t resolveComplexByte(std::string op, uint8_t arg1, uint8_t arg2);
         std::string m_name;
         uint8_t m_channel;
-        int m_channelOffset;
-        std::string m_messageFormat;
+        nlohmann::json m_messageFormat;
         std::vector<std::shared_ptr<Section>> m_sections;
         std::vector<std::shared_ptr<PartObserver>> m_observers;
 };
@@ -47,7 +47,7 @@ class Part : public ParameterObserver {
 
 class Synth : public PartObserver, public std::enable_shared_from_this<Synth> {
     public:
-        static Synth buildSynth(std::string syntDef, SbMidi sbMidi);
+        static std::shared_ptr<Synth> buildSynth(const std::string& syntDef, const SbMidi& sbMidi);
         static std::string getFullName(std::string synthDef);
         static std::string getShortName(std::string synthDef);
         Synth(SbMidi sbMidi);

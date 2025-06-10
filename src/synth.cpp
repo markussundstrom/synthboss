@@ -3,24 +3,25 @@
 Synth::Synth(SbMidi sbMidi)
     : m_sbMidi{sbMidi} {}
 
-Synth Synth::buildSynth(std::string synthDef, SbMidi sbMidi) {
-    Synth synth(sbMidi);
-    std::shared_ptr<Synth> synthPtr = std::make_shared<Synth>(synth);
+std::shared_ptr<Synth> Synth::buildSynth(const std::string& synthDef, const SbMidi& sbMidi) {
+    std::shared_ptr<Synth> synth = std::make_shared<Synth>(sbMidi);
     std::ifstream f(synthDef);
     json synthData = json::parse(f);
     for (const auto& jPart : synthData["parts"]) {
+        json messageformat = jPart["messageformat"];
+std::cout << "messageFormat at constructor: " << messageformat.dump(2) << std::endl;
+std::cout << "type: " << jPart["messageformat"].type_name() << std::endl;
         std::shared_ptr<Part> part = std::make_shared<Part>(jPart["name"],
                 jPart["channel"].template get<uint8_t>(),
-                jPart["channeloffset"], 
-                jPart["messageformat"]);
-        synth.m_parts.push_back(part);
-        part->addObserver(synthPtr);
+                messageformat);
+        synth->m_parts.push_back(part);
+        part->addObserver(synth);
         for (const auto& jSection : jPart["sections"]) {
             std::shared_ptr<Section> section = 
                 std::make_shared<Section>(jSection["name"]);
             part->addSection(section);
             for (const auto& jParam : jSection["parameters"]) {
-                std::shared_ptr<Parameter> param = synth.buildParameter(jParam);
+                std::shared_ptr<Parameter> param = synth->buildParameter(jParam);
                 param->addObserver(part);
                 section->addParameter(param);
                 param->setValue(param->value());
@@ -78,10 +79,9 @@ void Synth::messageCreated(std::vector<char> message) {
     m_sbMidi.TransmitMessage(message);
 }
 
-Part::Part(std::string name, uint8_t channel, int channelOffset, 
-        std::string messageFormat)
-    : m_name{name}, m_channel{channel}, m_channelOffset{channelOffset}, 
-      m_messageFormat{messageFormat} {}
+Part::Part(std::string name, uint8_t channel, json messageFormat)
+    : m_name{name}, m_channel{channel}, 
+      m_messageFormat{messageFormat} {std::cout << "Message format: " << m_messageFormat.dump(2) << std::endl;}
 
 
 void Part::notifyObservers(std::vector<char>  message) {
@@ -98,38 +98,54 @@ void Part::addObserver(std::shared_ptr<PartObserver> observer) {
 
 void Part::valueChanged(Parameter* parameter) {
     std::vector<char> message;
-    int start, end = -1;
-    do {
-        start = end + 1;
-        end = m_messageFormat.find(" ", start);
-        std::string current = m_messageFormat.substr(start, end - start);
-        unsigned char byte;
-        if (sscanf(current.c_str(), "%hhx", &byte)) {
-            ;
-        } else if (current == "{channel}") {
-            byte = m_channel + m_channelOffset;
-        } else if (current == "{parameter}") {
-            byte = parameter->parameterNumber();
-        } else if (current == "{value}") {
-            if (parameter->coherence()) {
-                byte = 0;
-                for (const auto& s : m_sections) {
-                    for (const auto& p : s->getParameters()) {
-                        if (parameter->coherence() == p->coherence()) {
-                            byte += p->value();
-                        }
-                    }
-                }
-            } else {
-                byte = parameter->value();
+    for(const auto& messagePart : m_messageFormat[0]) {
+        uint8_t byte;
+        if (messagePart.type() == json::value_t::object) {
+            if (!messagePart.contains("op") || !messagePart.contains("arg1") || !messagePart.contains("arg2")) {
+                std::cerr << "Invalid messagePart object: missing 'op', 'arg1', or 'arg2'\n";
+                std::cerr << messagePart.dump(2) << std::endl;
+                continue;
             }
+            std::string op = messagePart["op"];
+            uint8_t arg1 = parseValue(parameter, messagePart["arg1"]);
+            uint8_t arg2 = parseValue(parameter, messagePart["arg2"]);
+            byte = resolveComplexByte(op, arg1, arg2);
         } else {
-            std::cerr << "Error when constructing MIDI message" << std::endl;
-            continue;
+            byte = parseValue(parameter, messagePart);
         }
-        message.push_back(byte);
-    } while (end != -1);
+       message.push_back((char)byte);
+    }
     notifyObservers(message);
+}
+
+
+uint8_t Part::parseValue(Parameter* parameter, const json& messagePart ) {
+    if (messagePart.is_number_integer()) {
+        return (uint8_t)messagePart.get<int>();
+    } else if (messagePart.is_string()) {
+        std::string key = messagePart.get<std::string>();
+        if (key == "value") {
+            return parameter->value();
+        } else if (key == "parameter") {
+            return parameter->parameterNumber();
+        } else if (key == "channel") {
+            return m_channel;
+        } else {
+            throw std::runtime_error("Error reading message format: " +  key) ;
+        }
+    } else {
+        throw std::runtime_error("Invalid message format type " + 
+                messagePart.dump(2) + ": " + messagePart.type_name());
+    }
+}
+
+
+uint8_t Part::resolveComplexByte(std::string op, uint8_t arg1, uint8_t arg2) {
+    if (op == "add") {
+        return arg1 + arg2;
+    } else {
+        throw std::runtime_error("Unknown operation in message format: " + op);
+    }
 }
 
 

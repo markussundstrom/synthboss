@@ -23,7 +23,7 @@ class SbGui : public QWidget {
         virtual ~SbGui() override;
         static std::string synthSelectionWidget(std::map<std::string, 
                 std::array<std::string, 2>>& choices);
-        void buildSynthGui(Synth synth);
+        void buildSynthGui(const Synth& synth);
         void syncFromBackend();
 
     private:
