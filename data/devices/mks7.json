@@ -129,7 +129,6 @@
         {
             "name": "Chord",
             "channel": 3,
-            "channeloffset": -1,
             "messageformat": [240, 65, 50, {"op": "add", "arg1": "channel", "arg2": 1}, "parameter", "value", 247],
             "sections": [
                 {
@@ -418,7 +417,6 @@
         {
             "name": "Melody",
             "channel": 1,
-            "channeloffset": -1,
             "messageformat": [240, 65, 50, {"op": "add", "arg1": "channel", "arg2": 1}, "parameter", "value", 247],
             "sections": [
                 {
