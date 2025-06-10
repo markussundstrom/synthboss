@@ -125,7 +125,19 @@ uint8_t Part::parseValue(Parameter* parameter, const json& messagePart ) {
     } else if (messagePart.is_string()) {
         std::string key = messagePart.get<std::string>();
         if (key == "value") {
-            return parameter->value();
+            if (parameter->coherence()) {
+                uint8_t byte = 0;
+                for (const auto& s : m_sections) {
+                    for (const auto& p :  s->getParameters()) {
+                        if (parameter->coherence() == p->coherence()) {
+                            byte += p->value();
+                        }
+                    }
+                }
+                return byte;
+            } else {
+                return parameter->value();
+            }
         } else if (key == "parameter") {
             return parameter->parameterNumber();
         } else if (key == "channel") {
