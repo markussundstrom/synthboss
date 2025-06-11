@@ -155,6 +155,8 @@ uint8_t Part::parseValue(Parameter* parameter, const json& messagePart ) {
 uint8_t Part::resolveComplexByte(std::string op, uint8_t arg1, uint8_t arg2) {
     if (op == "add") {
         return arg1 + arg2;
+    } else if (op == "sub") {
+        return arg1 - arg2;
     } else {
         throw std::runtime_error("Unknown operation in message format: " + op);
     }
