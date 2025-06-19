@@ -96,6 +96,37 @@
                                             "value": {
                                                 "type": "integer"
                                             },
+                                            "encoding": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "type": {
+                                                        "type": "string"
+                                                    },
+                                                    "valuebits": {
+                                                        "type": "integer"
+                                                    },
+                                                    "signbit": {
+                                                        "type": "integer"
+                                                    },
+                                                    "offset": {
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "dependencies" : {
+                                                    "type": {
+                                                        "oneOf": [
+                                                            {
+                                                                "properties": {"type": {"enum": ["unsigned"]}},
+                                                                "required": ["valuebits"]
+                                                            },
+                                                            {
+                                                                "properties": {"type": {"enum": ["signed"]}},
+                                                                "required": ["valuebits", "signbit"]
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            },
                                             "min": {
                                                 "type": "integer"
                                             },
