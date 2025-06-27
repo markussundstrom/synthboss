@@ -19,11 +19,12 @@ class Parameter {
         void notifyObservers();
         uint8_t m_value;
         int m_coherence;
+        nlohmann::json m_encoding;
 
     public:
         Parameter();
         Parameter(const std::string& name, uint8_t pNumber, uint8_t value, 
-                int coherence);
+                int coherence, nlohmann::json encoding);
         virtual ~Parameter() = default;
         void addObserver(std::shared_ptr<ParameterObserver> observer);
         virtual void setValue(uint8_t value);
@@ -31,6 +32,7 @@ class Parameter {
         uint8_t parameterNumber() const;
         uint8_t value() const;
         int coherence() const;
+        uint8_t encodedValue() const;
 };
 
 

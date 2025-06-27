@@ -130,13 +130,13 @@ uint8_t Part::parseValue(Parameter* parameter, const json& messagePart ) {
                 for (const auto& s : m_sections) {
                     for (const auto& p :  s->getParameters()) {
                         if (parameter->coherence() == p->coherence()) {
-                            byte += p->value();
+                            byte += p->encodedValue();
                         }
                     }
                 }
                 return byte;
             } else {
-                return parameter->value();
+                return parameter->encodedValue();
             }
         } else if (key == "parameter") {
             return parameter->parameterNumber();

@@ -4,9 +4,9 @@ Parameter::Parameter()
     : m_name(""), m_value(0) {}
 
 Parameter::Parameter(const std::string& name, uint8_t pNumber, uint8_t value,
-        int coherence)
+        int coherence, nlohmann::json encoding)
     : m_name{name}, m_pNumber{pNumber}, m_value{value},
-    m_coherence {coherence} {}
+    m_coherence{coherence}, m_encoding{encoding} {}
 
 void Parameter::notifyObservers() {
     for (auto observer : m_observers) {
@@ -45,11 +45,41 @@ int Parameter::coherence() const {
     return m_coherence;
 }
 
+uint8_t Parameter::encodedValue() const {
+    if (!m_encoding.is_object()) {
+        return m_value;
+    }
+
+    std::string type = m_encoding["type"];
+
+    if (type == "signed") {
+        int valueBits = m_encoding["valuebits"];
+        int signBit = m_encoding["signBit"];
+        int offset = m_encoding.contains("offset") ? m_encoding["offset"].get<int>() : 0;
+        int value = m_value + offset;
+        bool isNeg = value < 0;
+        uint8_t result = std::abs(value) & ((1 << valueBits) - 1);
+        if (isNeg) {
+            result |= (1 << signBit);
+        }
+        return result;
+    } else if (type == "unsigned") {
+        int valueBits = m_encoding["valuebits"];
+        int offset = m_encoding.contains("offset") ? m_encoding["offset"].get<int>() : 0;
+        uint8_t value = m_value + offset;
+        return (value & ((1 << valueBits) - 1));
+    } else {
+        std::cerr << "Invalid parameter value encoding, returning base value" << std::endl;
+        return m_value;
+    }
+}
+
 
 RangeParameter::RangeParameter(const json param) 
     : Parameter {
         param["name"], param["parameternumber"], param["value"], 
-        param.contains("coherence") ?  param["coherence"].get<int>() : 0
+        param.contains("coherence") ?  param["coherence"].get<int>() : 0,
+        param.contains("encoding") ? param["encoding"] : nullptr
     },
     m_min{param["min"]}, m_max{param["max"]} {}
 
@@ -67,7 +97,8 @@ int RangeParameter::max() const {
 ToggleParameter::ToggleParameter(const json param)
     : Parameter {
         param["name"], param["parameternumber"], param["value"],
-        param.contains("coherence") ?  param["coherence"].get<int>() : 0
+        param.contains("coherence") ?  param["coherence"].get<int>() : 0,
+        param.contains("encoding") ? param["encoding"] : nullptr
     },
     m_on{param["on"]}, m_off{param["off"]} {}
 
@@ -85,7 +116,8 @@ bool ToggleParameter::valueBool() {
 SelectParameter::SelectParameter(const json param)
     : Parameter {
         param["name"], param["parameternumber"], param["value"], 
-        param.contains("coherence") ?  param["coherence"].get<int>() : 0
+        param.contains("coherence") ?  param["coherence"].get<int>() : 0,
+        param.contains("encoding") ? param["encoding"] : nullptr
     },
     m_choices{} {
         for (const auto& choice : param["choices"]) {
