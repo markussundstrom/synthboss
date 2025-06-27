@@ -4,11 +4,11 @@
     "shortname": "k3m",
     "parts": [
         {
-            "name": "K3",
+            "name": "K3m",
             "channel": 1,
             "messageformat": [
                 240, 64, {"op": "sub", "arg1": "channel", "arg2": 1}, 
-                16, 0, 1, "parameter", {"op": "rshift", "arg1": "value", "arg2": 4},
+                16, 0, 1, "parameter", {"op": "lshift", "arg1": "value", "arg2": 4},
                 {"op": "and", "arg1": "value", "arg2": 15}, 247
             ],
             "sections": [
@@ -29,6 +29,10 @@
                             "parameternumber": 1,
                             "class": "select",
                             "choices": [
+                                {
+                                    "name": "NONE",
+                                    "optionvalue": 0
+                                },
                                 {
                                     "name": "01 Grand Piano I",
                                     "optionvalue": 1
@@ -242,6 +246,10 @@
                             "parameternumber": 7,
                             "class": "select",
                             "choices": [
+                                {
+                                    "name": "NONE",
+                                    "optionvalue": 0
+                                },
                                 {
                                     "name": "01 Grand Piano I",
                                     "optionvalue": 1
