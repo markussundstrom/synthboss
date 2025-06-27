@@ -1,0 +1,730 @@
+{
+    "manufacturer": "Kawai",
+    "model": "K3",
+    "shortname": "k3m",
+    "parts": [
+        {
+            "name": "K3",
+            "channel": 1,
+            "messageformat": [
+                240, 64, {"op": "sub", "arg1": "channel", "arg2": 1}, 
+                16, 0, 1, "parameter", {"op": "rshift", "arg1": "value", "arg2": 4},
+                {"op": "and", "arg1": "value", "arg2": 15}, 247
+            ],
+            "sections": [
+                {
+                    "name": "OSC",
+                    "parameters": [
+                        {
+                            "name": "MONO",
+                            "parameternumber": 5,
+                            "class": "toggle",
+                            "coherence": 5,
+                            "on": 128,
+                            "off": 0,
+                            "value": 0
+                        },
+                        {
+                            "name": "OSC 1 WAVE",
+                            "parameternumber": 1,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "01 Grand Piano I",
+                                    "optionvalue": 1
+                                },
+                                {
+                                    "name": "02 Bell",
+                                    "optionvalue": 2
+                                },
+                                {
+                                    "name": "03 Strings",
+                                    "optionvalue": 3
+                                },
+                                {
+                                    "name": "04 E. Bass",
+                                    "optionvalue": 4
+                                },
+                                {
+                                    "name": "05 Oboe",
+                                    "optionvalue": 5
+                                },
+                                {
+                                    "name": "06 E. Piano I",
+                                    "optionvalue": 6
+                                },
+                                {
+                                    "name": "07 Organ",
+                                    "optionvalue": 7
+                                },
+                                {
+                                    "name": "08 Brass 1",
+                                    "optionvalue": 8
+                                },
+                                {
+                                    "name": "09 Digital Bell",
+                                    "optionvalue": 9
+                                },
+                                {
+                                    "name": "10 Slap Bass",
+                                    "optionvalue": 10
+                                },
+                                {
+                                    "name": "11 Plucked String",
+                                    "optionvalue": 11
+                                },
+                                {
+                                    "name": "12 Classic Guitar",
+                                    "optionvalue": 12
+                                },
+                                {
+                                    "name": "13 Hammered Tine",
+                                    "optionvalue": 13
+                                },
+                                {
+                                    "name": "14 Metallic Wave",
+                                    "optionvalue": 14
+                                },
+                                {
+                                    "name": "15 Vox Humana",
+                                    "optionvalue": 15
+                                },
+                                {
+                                    "name": "16 Sharp Wave",
+                                    "optionvalue": 16
+                                },
+                                {
+                                    "name": "17 Digital Harmonics",
+                                    "optionvalue": 17
+                                },
+                                {
+                                    "name": "18 Pipe Organ",
+                                    "optionvalue": 18
+                                },
+                                {
+                                    "name": "19 Wood Bass",
+                                    "optionvalue": 19
+                                },
+                                {
+                                    "name": "20 Resonant Strings",
+                                    "optionvalue": 20
+                                },
+                                {
+                                    "name": "21 E. Piano II",
+                                    "optionvalue": 21
+                                },
+                                {
+                                    "name": "22 Jazz Organ",
+                                    "optionvalue": 22
+                                },
+                                {
+                                    "name": "23 Glocken",
+                                    "optionvalue": 23
+                                },
+                                {
+                                    "name": "24 Oriental Bell",
+                                    "optionvalue": 24
+                                },
+                                {
+                                    "name": "25 Harpsichord",
+                                    "optionvalue": 25
+                                },
+                                {
+                                    "name": "26 Trumpet",
+                                    "optionvalue": 26
+                                },
+                                {
+                                    "name": "27 Sax",
+                                    "optionvalue": 27
+                                },
+                                {
+                                    "name": "28 Grand Piano II",
+                                    "optionvalue": 28
+                                },
+                                {
+                                    "name": "29 Square",
+                                    "optionvalue": 29
+                                },
+                                {
+                                    "name": "30 Sawtooth",
+                                    "optionvalue": 30
+                                },
+                                {
+                                    "name": "31 Sine",
+                                    "optionvalue": 31
+                                },
+                                {
+                                    "name": "32 Programmable Wave",
+                                    "optionvalue": 32
+                                },
+                                {
+                                    "name": "33 White Noise",
+                                    "optionvalue": 33
+                                }
+                            ],
+                            "value": 1
+                        },
+                        {
+                            "name": "RANGE",
+                            "parameternumber": 1,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "16'",
+                                    "optionvalue": 0
+                                },
+                                {
+                                    "name": "8'",
+                                    "optionvalue": 64
+                                },
+                                {
+                                    "name": "4'",
+                                    "optionvalue": 128
+                                }
+                            ],
+                            "value": 64
+                        },
+                        {
+                            "name": "PORTA",
+                            "parameternumber": 3,
+                            "class": "toggle",
+                            "coherence": 3,
+                            "on": 128,
+                            "off": 0,
+                            "value": 0
+                        },
+                        {
+                            "name": "PORTA SPEED",
+                            "parameternumber": 3,
+                            "class": "range",
+                            "coherence": 3,
+                            "min": 0,
+                            "max": 99,
+                            "value": 0
+                        },
+                        {
+                            "name": "BALANCE",
+                            "parameternumber": 4,
+                            "class": "range",
+                            "min": -15,
+                            "max": 15,
+                            "encoding": {
+                                "type": "signed",
+                                "valuebits": 4,
+                                "signbit": 7
+                            },
+                            "value": 0
+                        },
+                        {
+                            "name": "PITCH BEND",
+                            "parameternumber": 5,
+                            "class": "range",
+                            "coherence": 5,
+                            "min": 1,
+                            "max": 7,
+                            "value": 2
+                        },
+                        {
+                            "name": "AUTOBEND",
+                            "parameternumber": 6,
+                            "class": "range",
+                            "min": -31,
+                            "max": 31,
+                            "encoding": {
+                                "type": "signed",
+                                "valuebits": 5,
+                                "signbit": 7
+                            },
+                            "value": 0
+                        },
+                        {
+                            "name": "OSC 2 WAVE",
+                            "parameternumber": 7,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "01 Grand Piano I",
+                                    "optionvalue": 1
+                                },
+                                {
+                                    "name": "02 Bell",
+                                    "optionvalue": 2
+                                },
+                                {
+                                    "name": "03 Strings",
+                                    "optionvalue": 3
+                                },
+                                {
+                                    "name": "04 E. Bass",
+                                    "optionvalue": 4
+                                },
+                                {
+                                    "name": "05 Oboe",
+                                    "optionvalue": 5
+                                },
+                                {
+                                    "name": "06 E. Piano I",
+                                    "optionvalue": 6
+                                },
+                                {
+                                    "name": "07 Organ",
+                                    "optionvalue": 7
+                                },
+                                {
+                                    "name": "08 Brass 1",
+                                    "optionvalue": 8
+                                },
+                                {
+                                    "name": "09 Digital Bell",
+                                    "optionvalue": 9
+                                },
+                                {
+                                    "name": "10 Slap Bass",
+                                    "optionvalue": 10
+                                },
+                                {
+                                    "name": "11 Plucked String",
+                                    "optionvalue": 11
+                                },
+                                {
+                                    "name": "12 Classic Guitar",
+                                    "optionvalue": 12
+                                },
+                                {
+                                    "name": "13 Hammered Tine",
+                                    "optionvalue": 13
+                                },
+                                {
+                                    "name": "14 Metallic Wave",
+                                    "optionvalue": 14
+                                },
+                                {
+                                    "name": "15 Vox Humana",
+                                    "optionvalue": 15
+                                },
+                                {
+                                    "name": "16 Sharp Wave",
+                                    "optionvalue": 16
+                                },
+                                {
+                                    "name": "17 Digital Harmonics",
+                                    "optionvalue": 17
+                                },
+                                {
+                                    "name": "18 Pipe Organ",
+                                    "optionvalue": 18
+                                },
+                                {
+                                    "name": "19 Wood Bass",
+                                    "optionvalue": 19
+                                },
+                                {
+                                    "name": "20 Resonant Strings",
+                                    "optionvalue": 20
+                                },
+                                {
+                                    "name": "21 E. Piano II",
+                                    "optionvalue": 21
+                                },
+                                {
+                                    "name": "22 Jazz Organ",
+                                    "optionvalue": 22
+                                },
+                                {
+                                    "name": "23 Glocken",
+                                    "optionvalue": 23
+                                },
+                                {
+                                    "name": "24 Oriental Bell",
+                                    "optionvalue": 24
+                                },
+                                {
+                                    "name": "25 Harpsichord",
+                                    "optionvalue": 25
+                                },
+                                {
+                                    "name": "26 Trumpet",
+                                    "optionvalue": 26
+                                },
+                                {
+                                    "name": "27 Sax",
+                                    "optionvalue": 27
+                                },
+                                {
+                                    "name": "28 Grand Piano II",
+                                    "optionvalue": 28
+                                },
+                                {
+                                    "name": "29 Square",
+                                    "optionvalue": 29
+                                },
+                                {
+                                    "name": "30 Sawtooth",
+                                    "optionvalue": 30
+                                },
+                                {
+                                    "name": "31 Sine",
+                                    "optionvalue": 31
+                                },
+                                {
+                                    "name": "32 Programmable Wave",
+                                    "optionvalue": 32
+                                },
+                                {
+                                    "name": "33 White Noise",
+                                    "optionvalue": 33
+                                }
+                            ],
+                            "value": 1
+                        },
+                        {
+                            "name": "OSC 2 COARSE",
+                            "parameternumber": 8,
+                            "class": "range",
+                            "min": -24,
+                            "max": 24,
+                            "encoding": {
+                                "type": "signed",
+                                "valuebits": 5,
+                                "signbit": 7
+                            },
+                            "value": 0
+                        },
+                        {
+                            "name": "OSC 2 FINE",
+                            "parameternumber": 9,
+                            "class": "range",
+                            "min": -10,
+                            "max": 10,
+                            "encoding": {
+                                "type": "signed",
+                                "valuebits": 4,
+                                "signbit": 7
+                            },
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "VCF",
+                    "parameters": [
+                        {
+                            "name": "CUTOFF",
+                            "parameternumber": 10,
+                            "class": "range",
+                            "min": 0,
+                            "max": 99,
+                            "value": 99
+                        },
+                        {
+                            "name": "RESONANCE",
+                            "parameternumber": 11,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        },
+                        {
+                            "name": "LOW CUT",
+                            "parameternumber": 12,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        },
+        {
+                            "name": "ENV",
+                            "parameternumber": 13,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        },
+                        {
+                            "name": "ATTACK",
+                            "parameternumber": 14,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        },
+                        {
+                            "name": "DECAY",
+                            "parameternumber": 15,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        },
+                        {
+                            "name": "SUSTAIN",
+                            "parameternumber": 17,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 31
+                        },
+                        {
+                            "name": "RELEASE",
+                            "parameternumber": 18,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "VCA",
+                    "parameters": [
+                        {
+                            "name": "LEVEL",
+                            "parameternumber": 19,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 20
+                        },
+                        {
+                            "name": "ATTACK",
+                            "parameternumber": 20,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        },
+                        {
+                            "name": "DECAY",
+                            "parameternumber": 21,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 20
+                        },
+                        {
+                            "name": "SUSTAIN",
+                            "parameternumber": 23,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 31
+                        },
+                        {
+                            "name": "RELEASE",
+                            "parameternumber": 24,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "LFO",
+                    "parameters": [
+                        {
+                            "name": "SHAPE",
+                            "parameternumber": 25,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "Triangle",
+                                    "optionvalue": 1
+                                },
+                                {
+                                    "name": "Sawtooth",
+                                    "optionvalue": 2
+                                },
+                                {
+                                    "name": "Reverse Sawtooth",
+                                    "optionvalue": 3
+                                },
+                                {
+                                    "name": "Square",
+                                    "optionvalue": 4
+                                },
+                                {
+                                    "name": "Inverted Square",
+                                    "optionvalue": 5
+                                },
+                                {
+                                    "name": "Random",
+                                    "optionvalue": 6
+                                },
+                                {
+                                    "name": "Chromatic Random",
+                                    "optionvalue": 7
+                                }
+                            ],
+                            "value": 1
+                        },
+                        {
+                            "name": "SPEED",
+                            "parameternumber": 26,
+                            "class": "range",
+                            "min": 0,
+                            "max": 99,
+                            "value": 0
+                        },
+                        {
+                            "name": "DELAY",
+                            "parameternumber": 27,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        },
+                        {
+                            "name": "OSC",
+                            "parameternumber": 28,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        },
+                        {
+                            "name": "VCF",
+                            "parameternumber": 29,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        },
+                        {
+                            "name": "VCA",
+                            "parameternumber": 30,
+                            "class": "range",
+                            "min": 0,
+                            "max": 31,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "TOUCHSENS",
+                    "parameters": [
+                        {
+                            "name": "VELO VCF",
+                            "parameternumber": 31,
+                            "class": "range",
+                            "min": 0,
+                            "max": 15,
+                            "value": 0
+                        },
+                        {
+                            "name": "VELO VCA",
+                            "parameternumber": 32,
+                            "class": "range",
+                            "min": 0,
+                            "max": 15,
+                            "value": 0
+                        },
+                        {
+                            "name": "PRES OSC BAL",
+                            "parameternumber": 33,
+                            "class": "range",
+                            "min": 0,
+                            "max": 15,
+                            "value": 0
+                        },
+                        {
+                            "name": "PRES VCF",
+                            "parameternumber": 34,
+                            "class": "range",
+                            "min": 0,
+                            "max": 15,
+                            "value": 0
+                        },
+                        {
+                            "name": "PRES VCA",
+                            "parameternumber": 35,
+                            "class": "range",
+                            "min": 0,
+                            "max": 15,
+                            "value": 0
+                        },
+                        {
+                            "name": "PRES LFO OSC",
+                            "parameternumber": 36,
+                            "class": "range",
+                            "min": 0,
+                            "max": 15,
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "KCV",
+                    "parameters": [
+                        {
+                            "name": "VCF",
+                            "parameternumber": 37777777,
+                            "class": "range",
+                            "min": -15,
+                            "max": 15,
+                            "encoding": {
+                                "type": "signed",
+                                "valuebits": 4,
+                                "signbit": 7
+                            },
+                            "value": 0
+                        },
+                        {
+                            "name": "VCA",
+                            "parameternumber": 38,
+                            "class": "range",
+                            "min": -15,
+                            "max": 15,
+                            "encoding": {
+                                "type": "signed",
+                                "valuebits": 4,
+                                "signbit": 7
+                            },
+                            "value": 0
+                        },
+                        {
+                            "name": "CHORUS",
+                            "parameternumber": 39,
+                            "class": "select",
+                            "choices": [
+                                {
+                                    "name": "None",
+                                    "optionvalue": 0
+                                },
+                                {
+                                    "name": "Chorus I (slow choral/phase shift)",
+                                    "optionvalue": 1
+                                },
+                                {
+                                    "name": "Chorus II (combination slow/fast shift",
+                                    "optionvalue": 2
+                                },
+                                {
+                                    "name": "Chorus III (medium, random shift)",
+                                    "optionvalue": 3
+                                },
+                                {
+                                    "name": "Tremolo (fast, deep shift)",
+                                    "optionvalue": 4
+                                },
+                                {
+                                    "name": "Chorus IV (ambience 1)",
+                                    "optionvalue": 5
+                                },
+                                {
+                                    "name": "Chorus V (ambience 2)",
+                                    "optionvalue": 6
+                                },
+                                {
+                                    "name": "Delay (short, 40-60 ms)",
+                                    "optionvalue": 7
+                                }
+                            ],
+                            "value": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
