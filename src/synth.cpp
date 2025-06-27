@@ -157,6 +157,12 @@ uint8_t Part::resolveComplexByte(std::string op, uint8_t arg1, uint8_t arg2) {
         return arg1 + arg2;
     } else if (op == "sub") {
         return arg1 - arg2;
+    } else if (op == "lshift") {
+        return arg1 << arg2;
+    } else if (op == "rshift") {
+        return arg1 >> arg2;
+    } else if (op == "and") {
+        return arg1 & arg2;
     } else {
         throw std::runtime_error("Unknown operation in message format: " + op);
     }
