@@ -9,8 +9,6 @@ std::shared_ptr<Synth> Synth::buildSynth(const std::string& synthDef, const SbMi
     json synthData = json::parse(f);
     for (const auto& jPart : synthData["parts"]) {
         json messageformat = jPart["messageformat"];
-std::cout << "messageFormat at constructor: " << messageformat.dump(2) << std::endl;
-std::cout << "type: " << jPart["messageformat"].type_name() << std::endl;
         std::shared_ptr<Part> part = std::make_shared<Part>(jPart["name"],
                 jPart["channel"].template get<uint8_t>(),
                 messageformat);
@@ -70,7 +68,6 @@ std::shared_ptr<Parameter> Synth::buildParameter(json param) {
     } else {
         std::cerr << "Error parameter class: " << param["class"] << std::endl;
     }
-    std::cout << paramPointer->parameterNumber() << std::endl;
     return paramPointer;
 }
 
@@ -81,7 +78,7 @@ void Synth::messageCreated(std::vector<char> message) {
 
 Part::Part(std::string name, uint8_t channel, json messageFormat)
     : m_name{name}, m_channel{channel}, 
-      m_messageFormat{messageFormat} {std::cout << "Message format: " << m_messageFormat.dump(2) << std::endl;}
+      m_messageFormat{messageFormat} {}
 
 
 void Part::notifyObservers(std::vector<char>  message) {
